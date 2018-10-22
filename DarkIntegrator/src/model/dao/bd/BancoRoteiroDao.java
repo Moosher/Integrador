@@ -1,6 +1,9 @@
 package model.dao.bd;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +14,24 @@ public class BancoRoteiroDao implements RoteiroDao {
 
 	@Override
 	public void adicionarRoteiro( Roteiro roteiro ) {
+		Connection conn = DatabaseService.getConnection();
+		PreparedStatement ps = null;
+
+		try {
+			ps = conn.prepareStatement( "" );
+			ps.executeQuery();
+
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch ( SQLException e ) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 

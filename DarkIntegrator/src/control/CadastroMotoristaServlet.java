@@ -32,7 +32,7 @@ public class CadastroMotoristaServlet extends HttpServlet {
 		String endereco = request.getParameter( "endereco" );
 		char tipoCNH = request.getParameter( "tipoCNH" ).charAt( 0 );
 		String cNH = request.getParameter( "CNH" );
-		Motorista motorista = new Motorista( nome, dataNasc, endereco, tipoCNH, cNH, false );
+		Motorista motorista = new Motorista( nome, dataNasc, endereco, tipoCNH, cNH, true );
 
 		DaoFactory.getDaoFactory().getMotoristaDao().adicionarMotorista( motorista );
 		response.sendRedirect( AppConsts.CAMINHO + "/home.jsp?tpcnh=" + tipoCNH );

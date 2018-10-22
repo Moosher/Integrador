@@ -20,20 +20,20 @@ public class Motorista {
 
 	private String CNH;
 
-	public Motorista(String nome, String dataNasc, String endereco, char tipoCNH, String cNH, boolean validacao) {
+	public Motorista( String nome, String dataNasc, String endereco, char tipoCNH, String cNH, boolean validacao ) {
 		this.nome = nome;
 		this.dataNasc = dataNasc;
 		this.endereco = endereco;
-		this.setTipoCNH(tipoCNH);
+		this.setTipoCNH( tipoCNH );
 		this.CNH = cNH;
-		this.setDisponivel(true);
+		this.setDisponivel( validacao );
 	}
 
 	public String getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId( String id ) {
 		this.id = id;
 	}
 
@@ -41,7 +41,7 @@ public class Motorista {
 		return this.nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome( String nome ) {
 		this.nome = nome;
 	}
 
@@ -49,7 +49,7 @@ public class Motorista {
 		return this.dataNasc;
 	}
 
-	public void setDataNasc(String dataNasc) {
+	public void setDataNasc( String dataNasc ) {
 		this.dataNasc = dataNasc;
 	}
 
@@ -57,7 +57,7 @@ public class Motorista {
 		return this.endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco( String endereco ) {
 		this.endereco = endereco;
 	}
 
@@ -65,10 +65,10 @@ public class Motorista {
 		return this.tipoCNH;
 	}
 
-	public void setTipoCNH(char tipoCNH) {
-		if (tipoCNH == 'B') {
+	public void setTipoCNH( char tipoCNH ) {
+		if ( tipoCNH == 'B' ) {
 			this.tipoCNH = TipoCNH.B;
-		} else if (tipoCNH == 'C') {
+		} else if ( tipoCNH == 'C' ) {
 			this.tipoCNH = TipoCNH.C;
 		}
 	}
@@ -77,22 +77,21 @@ public class Motorista {
 		return this.CNH;
 	}
 
-	public void setCNH(String CNH) {
+	public void setCNH( String CNH ) {
 		this.CNH = CNH;
 	}
 
 	public boolean isDisponivel() {
-		return disponivel;
+		return this.disponivel;
 	}
 
-	public void setDisponivel(boolean disponibilidade) {
+	public void setDisponivel( boolean disponibilidade ) {
 		this.disponivel = disponibilidade;
 	}
 
 	@Override
 	public String toString() {
-		String motorista = "nome:" + this.nome + ",dataNasc:" + this.dataNasc + ",endereco:" + this.endereco
-				+ ",tipoCNH:" + this.tipoCNH + ",CNH:" + this.CNH;
+		String motorista = "nome:" + this.nome + ",dataNasc:" + this.dataNasc + ",endereco:" + this.endereco + ",tipoCNH:" + this.tipoCNH + ",CNH:" + this.CNH;
 		return motorista;
 	}
 }

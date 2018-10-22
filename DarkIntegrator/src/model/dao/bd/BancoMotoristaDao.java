@@ -8,6 +8,7 @@ import java.util.List;
 
 import model.Motorista;
 import model.dao.MotoristaDao;
+import resources.GerenciadorData;
 
 public class BancoMotoristaDao implements MotoristaDao {
 
@@ -15,16 +16,23 @@ public class BancoMotoristaDao implements MotoristaDao {
 	public void adicionarMotorista( Motorista motorista ) {
 		Connection conn = DatabaseService.getConnection();
 		PreparedStatement ps = null;
+		String aux1 = "";
+		if ( motorista.isDisponivel() ) {
+			aux1 = "1";
+
+		} else {
+			aux1 = "0";
+		}
 
 		try {
 			ps = conn.prepareStatement(
 					"INSERT INTO Motorista (MotoristaID, MotoristaNome, MotoristaDataNascimento, MotoristaEndereco, MotoristaTipoCNH, MotoristaNumCNH, MotoristaStatus) values(MOTORISTA_SEQ.NEXTVAL, ? , ? , ? , ? , ? , ? )" );
 			ps.setString( 1, motorista.getNome() );
-			ps.setDate( 2, motorista.getDataNasc() );
+			ps.setDate( 2, GerenciadorData.getInstance().strToDate( motorista.getDataNasc() ) );
 			ps.setString( 3, motorista.getEndereco() );
 			ps.setString( 4, String.valueOf( motorista.getTipoCNH() ) );
 			ps.setString( 5, motorista.getCNH() );
-			ps.setBoolean( 6, motorista.isDisponivel() );
+			ps.setString( 6, aux1 );
 
 			ps.executeQuery();
 

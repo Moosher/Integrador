@@ -1,10 +1,10 @@
 package resources;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class GerenciadorData {
 
@@ -21,14 +21,25 @@ public class GerenciadorData {
 		return dataAtual;
 	}
 
-	public Date ConvertDate( String data ) throws ParseException {
-		SimpleDateFormat df = new SimpleDateFormat( "dd/MM/yyyy" );
-		return df.parse( data );
+	public Date strToDate( String s ) {
+		SimpleDateFormat sdf1 = new SimpleDateFormat( "yyyy-MM-dd" );//formato de entrada
+		java.sql.Date data = new Date( new java.util.Date().getTime() );
+		if ( s != null && !s.isEmpty() ) {
+			try {
+				java.util.Date d = sdf1.parse( s );
+				sdf1.applyPattern( "dd/MM/yyyy" );//formato de saída
+				java.sql.Date dataFinal = new Date( d.getTime() );
+				return dataFinal;
+			} catch ( ParseException e ) {
+				e.printStackTrace();
+			}
 
+		}
+		return data;//nunca ocorre
 	}
 
-	public Date dateAtual() throws ParseException {
-		Date dateAtual = new Date();
+	public java.util.Date dateAtual() throws ParseException {
+		java.util.Date dateAtual = new java.util.Date();
 		return dateAtual;
 	}
 }
