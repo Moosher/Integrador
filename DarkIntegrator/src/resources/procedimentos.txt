@@ -1,0 +1,28 @@
+1 - Instalar o Oracle XE 11g release 2;
+2 - Memorizar a senha que você digitou para o usuário system (sério, eu já esqueci e não foi legal);
+3 - Instalar o SQL Developer;
+4 - Criar uma conexão com o usuário system, exemplo: bdoracle;
+5 - Clicar em SQL e conectar uma conexão com o bdoracle;
+6 - Mudar a porta do Oracle com o comando. F5 para executar todas as linhas: 
+
+begin
+    dbms_xdb.sethttpport('9090');
+end; 
+
+7 - Executar o comando para criar um usuário integrador:
+
+grant connect, create session, resource,create view to integrador identified by schema;
+
+8 - Clicar no botão de + e criar uma nova conexão com o usuário integrador e a senha do system.
+9 - Clicar em SQL e conectar no integrador. Na query colar todo o conteúdo do arquivo integrador.sql.
+
+10 - No Eclipse, pressionar CTRL + SHIFT + R e digitar server.xml;
+11 - Colocar no server.xml (Substituir o connector de mesma porta):
+<Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443" URIEncoding="ISO-8859-1"/>
+       
+12 - Baixar o OJDBC e colocar na pasta que você instalou o TomCat/lib;
+13 - Caso o projeto esteja com algum erro, vá em Markers, clique em cima do erro, botão direito, Quick-Fix.
+	 Vai abrir a tela de configuração do Classhpath, ir na biblioteca que está dando problema (ojbc), clicar
+	 em Editar e selecionar o lugar onde você colocou ela.
+
+14- Fim.

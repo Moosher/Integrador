@@ -1,0 +1,301 @@
+
+body {
+	padding: 20px 20px 60px 20px;
+	font-family: 'Tajawal', sans-serif;
+	color: #000000;	
+	background-color: #f2f2f2;
+}
+
+h2{
+	
+	font-size: 70px;
+}
+
+
+#home{
+	background-color: #ffffff;
+}
+
+#empnome{
+	font-family: 'Bungee Inline', cursive;
+	background: #6d7fcc;
+	padding: 6px;
+}
+
+svg{
+	margin-right: 5px !important;
+}
+
+.card{
+	width: 18rem; 
+	float: left; 
+	margin:10px;
+}
+
+/* ---------------------------------------------------
+    CONT
+----------------------------------------------------- */
+
+.container {
+	border-radius: 15px;	
+	background-color: #f2f2f2;
+	width: 60%;
+	padding: 20px;
+	
+}
+
+.smcont{
+	width: 40%;
+	border: 2px solid #ffffff;
+	background-color: #ffffff;
+}
+
+.cadcont{
+	border: 2px solid #ffffff;
+	background-color: #ffffff;
+}
+
+#homecont{
+	
+	width: 100%;
+    padding: 40px;
+    padding-top: 0px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 100vh;
+    top: 10%;
+	background-color: #ffffff;
+}
+
+/* ---------------------------------------------------
+    BUTTON
+----------------------------------------------------- */
+.ola{
+	text-transform: capitalize;
+}
+
+
+#recibo{
+	background-color:  #ffffe6;
+	padding: 10px;
+}
+
+.btn-primary{
+	background-color: #6d7fcc;
+	border-color: #6d7fcc;
+
+}
+
+.btn-primary:hover{
+	background-color:#17a2b8;
+	border-color:#17a2b8;
+
+}
+
+.btn-secondary{
+	background-color:#17a2b8;
+	border-color:#17a2b8;
+
+}
+
+.btn-secondary:hover{
+	background-color: #6d7fcc;
+	border-color: #6d7fcc;
+
+}
+
+.btn-danger{
+	background-color: #e65c00;
+	border-color: #e65c00;
+
+}
+
+.btn-danger:hover{
+	background-color: #ff8533;
+	border-color: #ff8533;
+
+}
+
+
+/* ---------------------------------------------------
+    Modal
+----------------------------------------------------- */
+
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
+.containerModal{
+	padding: 20px;
+}
+
+td, th{
+	text-align: center;
+}
+
+th.thbtn{
+	width: 1px;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR
+----------------------------------------------------- */
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #17a2b8;
+    color: #ffffff;
+    transition: all 0.3s;
+
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #17a2b8;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    
+}
+
+#sidebar ul p {
+    color: #ffffff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #ffffff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #ffffff;
+    background: #148c9f;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #148c9f;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+.content {
+    width: calc(100% - 250px);
+    padding: 40px;
+    padding-top: 0px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.content.active {
+    width: 100%;
+}
+
+/* ---------------------------------------------------
+    FOOTER
+----------------------------------------------------- */
+
+.footer{
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   height: 25px;
+   background-color: #e6e6e6;
+   color: #b3b3b3;
+   text-align: center;
+   z-index: 999;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    .content {
+        width: 100%;
+    }
+    .content.active {
+        width: calc(100% - 250px);
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}}
+
+
+
+
