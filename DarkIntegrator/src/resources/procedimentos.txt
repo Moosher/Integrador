@@ -26,3 +26,27 @@ grant connect, create session, resource,create view to integrador identified by 
 	 em Editar e selecionar o lugar onde você colocou ela.
 
 14- Fim.
+
+
+		Connection conn = DatabaseService.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = conn.prepareStatement( "" );
+			rs = ps.executeQuery();
+
+			
+
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				ps.close();
+				rs.close();
+				conn.close();
+			} catch ( SQLException e ) {
+				e.printStackTrace();
+			}
+		}

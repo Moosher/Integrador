@@ -1,6 +1,7 @@
 package resources;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -18,6 +19,12 @@ public class GerenciadorData {
 		LocalDateTime localDate = LocalDateTime.now();
 		String dataAtual = dtf.format( localDate );
 		return dataAtual;
+	}
+
+	public Date ConvertDate( String data ) throws ParseException {
+		SimpleDateFormat df = new SimpleDateFormat( "dd/MM/yyyy" );
+		return df.parse( data );
+
 	}
 
 	public Date dateAtual() throws ParseException {

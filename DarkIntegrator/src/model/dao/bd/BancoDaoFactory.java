@@ -1,6 +1,7 @@
 package model.dao.bd;
 
 import model.dao.DaoFactory;
+import model.dao.MotoristaDao;
 import model.dao.ObjetoDao;
 import model.dao.UsuarioDao;
 
@@ -24,5 +25,10 @@ public class BancoDaoFactory extends DaoFactory {
 	@Override
 	public UsuarioDao getUsuarioDao() {
 		return new BancoUsuarioDao();
+	}
+
+	@Override
+	public MotoristaDao getMotoristaDao() {
+		return new BancoMotoristaDao();
 	}
 }

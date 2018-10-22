@@ -2,7 +2,6 @@ package model.dao.bd;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,10 +35,10 @@ public class BancoObjetoDao implements ObjetoDao {
 
 			ps.executeQuery();
 
-			DatabaseMetaData meta = conn.getMetaData();
-			String fab = meta.getDatabaseProductName();
-			String ver = meta.getDatabaseProductVersion();
-			System.out.println( fab + " <==> " + ver );
+			//			DatabaseMetaData meta = conn.getMetaData();
+			//			String fab = meta.getDatabaseProductName();
+			//			String ver = meta.getDatabaseProductVersion();
+			//			System.out.println( fab + " <==> " + ver );
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 
@@ -88,23 +87,19 @@ public class BancoObjetoDao implements ObjetoDao {
 
 	@Override
 	public void removerObjeto( Objeto objeto ) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public boolean verificaCodigo( String codigo ) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public void setStatus( Objeto objeto, Status status ) {
-		//TODO Fazer isso aqui.
 	}
 
 	@Override
 	public void carregarArquivo() throws IOException {
-		// Não implementa.
 	}
 }

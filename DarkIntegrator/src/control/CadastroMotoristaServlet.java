@@ -12,7 +12,7 @@ import model.Motorista;
 import model.dao.DaoFactory;
 import resources.AppConsts;
 
-@WebServlet("/CadastroMotoristaServlet")
+@WebServlet( "/CadastroMotoristaServlet" )
 public class CadastroMotoristaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -22,22 +22,20 @@ public class CadastroMotoristaServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		String dataNasc = request.getParameter("dataNasc");
-		String endereco = request.getParameter("endereco");
-		char tipoCNH = request.getParameter("tipoCNH").charAt(0);
-		String cNH = request.getParameter("CNH");
-		Motorista motorista = new Motorista(nome, dataNasc, endereco, tipoCNH, cNH, false);
-		
-		DaoFactory.getDaoFactory().getMotoristaDao().adicionarMotorista(motorista);
-		response.sendRedirect(AppConsts.CAMINHO + "/home.jsp?tpcnh=" + tipoCNH);
+	protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+		String nome = request.getParameter( "nome" );
+		String dataNasc = request.getParameter( "dataNasc" );
+		String endereco = request.getParameter( "endereco" );
+		char tipoCNH = request.getParameter( "tipoCNH" ).charAt( 0 );
+		String cNH = request.getParameter( "CNH" );
+		Motorista motorista = new Motorista( nome, dataNasc, endereco, tipoCNH, cNH, false );
+
+		DaoFactory.getDaoFactory().getMotoristaDao().adicionarMotorista( motorista );
+		response.sendRedirect( AppConsts.CAMINHO + "/home.jsp?tpcnh=" + tipoCNH );
 
 	}
 

@@ -7,7 +7,6 @@ CREATE TABLE Motorista (
   MotoristaNumCNH NUMBER,
   MotoristaStatus CHAR(1) NOT NULL
 );
-
   
 CREATE TABLE VeiculoTipo (
   VeiculoTipoID NUMBER CONSTRAINT PK_VeiculoTipo PRIMARY KEY,
@@ -50,7 +49,6 @@ CREATE TABLE Roteiro (
   ObjetoID NUMBER, CONSTRAINT FK_Objeto FOREIGN KEY(ObjetoID) REFERENCES Objeto(ObjetoID),
   VeiculoID NUMBER, CONSTRAINT FK_Veiculo FOREIGN KEY(VeiculoID) REFERENCES Veiculo(VeiculoID)
 );
-
 
 CREATE TABLE RoteiroObjeto (
   RoteiroObjetoID NUMBER CONSTRAINT PK_RoteiroObjeto_ID PRIMARY KEY,
