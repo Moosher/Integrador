@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import model.Objeto;
 import model.Roteiro;
 import model.dao.RoteiroDao;
 
@@ -58,6 +59,12 @@ public class BancoRoteiroDao implements RoteiroDao {
 	@Override
 	public void carregarArquivo() throws IOException {
 
+	}
+
+	@Override
+	public List<Objeto> getObjetoRoteiroList( String id ) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

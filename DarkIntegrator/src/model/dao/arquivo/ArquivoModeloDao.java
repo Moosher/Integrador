@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
 import com.google.gson.Gson;
 
 import model.Modelo;
@@ -20,18 +21,18 @@ public class ArquivoModeloDao implements ModeloDao {
 	private static List<Modelo> modelos = new ArrayList();
 
 	@Override
-	public void adicionarModelo(Modelo modelo) {
-		modelo.setId(FileControl.getInstance().gerarId());
-		this.modelos.add(modelo);
+	public void adicionarModelo( Modelo modelo ) {
+		modelo.setId( FileControl.getInstance().gerarId() );
+		this.modelos.add( modelo );
 		try {
-			salvarArquivo();
-		} catch (IOException e) {
+			this.salvarArquivo();
+		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void removerModelo(Modelo modelo) {
+	public void removerModelo( Modelo modelo ) {
 		// TODO Auto-generated method stub
 
 	}
@@ -46,13 +47,13 @@ public class ArquivoModeloDao implements ModeloDao {
 
 		Gson gson = new Gson();
 		FileWriter lstJson = null;
-		String lstModelo = gson.toJson(modelos);
+		String lstModelo = gson.toJson( modelos );
 
 		try {
-			lstJson = new FileWriter(AppConsts.CAMINHO_MODELO, false);
-			lstJson.write(lstModelo);
+			lstJson = new FileWriter( AppConsts.CAMINHO_MODELO, false );
+			lstJson.write( lstModelo );
 
-		} catch (IOException e) {
+		} catch ( IOException e ) {
 			e.printStackTrace();
 		} finally {
 			lstJson.close();
@@ -62,15 +63,15 @@ public class ArquivoModeloDao implements ModeloDao {
 
 	@Override
 	public void carregarArquivo() throws IOException {
-		File file = new File(AppConsts.CAMINHO_MODELO);
-		if (file.exists()) {
+		File file = new File( AppConsts.CAMINHO_MODELO );
+		if ( file.exists() ) {
 			BufferedReader lstModelo = null;
 			Gson gson = new Gson();
 			try {
-				lstModelo = new BufferedReader(new FileReader(AppConsts.CAMINHO_MODELO));
-				Modelo[] modeloArray = gson.fromJson(lstModelo, Modelo[].class);
+				lstModelo = new BufferedReader( new FileReader( AppConsts.CAMINHO_MODELO ) );
+				Modelo[] modeloArray = gson.fromJson( lstModelo, Modelo[].class );
 				modelos.clear();
-				modelos.addAll(Arrays.asList(modeloArray));
+				modelos.addAll( Arrays.asList( modeloArray ) );
 
 			} finally {
 				lstModelo.close();
@@ -79,23 +80,24 @@ public class ArquivoModeloDao implements ModeloDao {
 			this.salvarArquivo();
 		}
 	}
-	
+
 	@Override
 	public void salvarPreDefinidos() {
-		if (this.modelos.isEmpty()) {
-			this.modelos.add(new Modelo(10, "Carreta"));
-			this.modelos.add(new Modelo(3, "Caminh√£o-Ba√∫"));
-			this.modelos.add(new Modelo(1, "Van"));
+		if ( this.modelos.isEmpty() ) {
+			this.modelos.add( new Modelo( 10, "Carreta" ) );
+			this.modelos.add( new Modelo( 3, "Caminh„o B·u" ) );
+			this.modelos.add( new Modelo( 1, "Van" ) );
 		}
 	}
 
 	Comparator<Modelo> cmp = new Comparator<Modelo>() {
-		@Override
-		public int compare(Modelo modelo1, Modelo modelo2) {
 
-			if (modelo1.getCapacidade() > modelo2.getCapacidade()) {
+		@Override
+		public int compare( Modelo modelo1, Modelo modelo2 ) {
+
+			if ( modelo1.getCapacidade() > modelo2.getCapacidade() ) {
 				return -1;
-			} else if (modelo1.getCapacidade() == modelo2.getCapacidade()) {
+			} else if ( modelo1.getCapacidade() == modelo2.getCapacidade() ) {
 				return 0;
 			} else {
 				return 1;

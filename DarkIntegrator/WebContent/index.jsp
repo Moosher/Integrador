@@ -48,7 +48,7 @@
 		    
 	        <div class="col-auto my-1" style="padding-left: 0px;">
       			<div class="custom-control custom-checkbox mr-sm-2" >
-       				 <input type="checkbox" name="checkbanco" class="custom-control-input" id="banco" checked>
+       				 <input type="checkbox" name="checkbanco" class="custom-control-input" id="banco" >
        				 <label class="custom-control-label" for="banco">Deseja usar persistência em banco de dados?</label>
       			</div>
     		</div>

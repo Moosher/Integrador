@@ -39,17 +39,15 @@
 							</thead>
 							<tbody>
 								<%
-									int i = 0;
 									for(Roteiro roteiro :roteiros.getRoteiroList()){
 										if(!roteiro.getObjetosRoteiro().isEmpty()){
 											out.println("<tr>");											
-											out.println("<td><a class=btn btn-primary href="+ AppConsts.CAMINHO + "/roteiro/visualizarRoteiro.jsp?id="+ i +">Acesse</a></td>");											
+											out.println("<td><a class=btn btn-primary href="+ AppConsts.CAMINHO + "/roteiro/visualizarRoteiro.jsp?id="+ roteiro.getId() +">Acesse</a></td>");											
 											out.println("<td>"+ roteiro.toString() +"</td>");											
 											out.println("<td>"+ roteiro.getData() +"</td>");											
 											out.println("</tr>");
 											
 										}
-											i++;
 										
 									}	
 								%>

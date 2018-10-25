@@ -27,42 +27,41 @@ public class FileControl {
 		this.carregarSistema();
 	}
 
-	public void imprimirRecibo(String nomeRemetente, String enderecoRemetente, String nomeDestinatario,
-			String enderecoDestinatario, String dataDeposito, double peso, String codLocalizador) throws IOException {
+	public void imprimirRecibo( String nomeRemetente, String enderecoRemetente, String nomeDestinatario, String enderecoDestinatario, String dataDeposito, double peso, String codLocalizador )
+			throws IOException {
 		BufferedWriter bw = null;
 		try {
-			bw = new BufferedWriter(new FileWriter(new File(AppConsts.CAMINHO_RECIBO)));
+			bw = new BufferedWriter( new FileWriter( new File( AppConsts.CAMINHO_RECIBO ) ) );
 
-			bw.write("Transportadora Entrega RÃ¡pida");
+			bw.write( "Transportadora Entrega Rápida" );
 			bw.newLine();
-			bw.write("Recibo ");
+			bw.write( "Recibo " );
 			bw.newLine();
-			bw.write("CÃ³digo localizador: " + codLocalizador);
+			bw.write( "Código localizador: " + codLocalizador );
 			bw.newLine();
-			bw.write("Nome do remetente: " + nomeRemetente);
+			bw.write( "Nome do remetente: " + nomeRemetente );
 			bw.newLine();
-			bw.write("EndereÃ§o do remetente: " + enderecoRemetente);
+			bw.write( "Endereço do remetente: " + enderecoRemetente );
 			bw.newLine();
-			bw.write("Nome do destinatÃ¡rio: " + nomeDestinatario);
+			bw.write( "Nome do destinatário: " + nomeDestinatario );
 			bw.newLine();
-			bw.write("EndereÃ§o do destinatÃ¡rio: " + enderecoDestinatario);
+			bw.write( "Endereço do destinatário: " + enderecoDestinatario );
 			bw.newLine();
-			bw.write("Data de depÃ³sito do objeto na empresa: " + dataDeposito);
+			bw.write( "Data de depósito do objeto na empresa: " + dataDeposito );
 			bw.newLine();
-			bw.write("Peso do objeto:" + peso);
+			bw.write( "Peso do objeto:" + peso );
 
-		} catch (IOException e) {
+		} catch ( IOException e ) {
 			e.printStackTrace();
 		} finally {
 			bw.close();
 		}
 	}
 
-
 	private void carregarSistema() {
 
 		try {
-			
+
 			ModeloDao modelo = DaoFactory.getDaoFactory().getModeloDao();
 			modelo.salvarPreDefinidos();
 
@@ -77,11 +76,11 @@ public class FileControl {
 
 			VeiculoDao veiculo = DaoFactory.getDaoFactory().getVeiculoDao();
 			veiculo.carregarArquivo();
-			
+
 			RoteiroDao roteiro = DaoFactory.getDaoFactory().getRoteiroDao();
 			roteiro.carregarArquivo();
 
-		} catch (IOException e) {
+		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
 	}
@@ -89,8 +88,8 @@ public class FileControl {
 	public String gerarId() {
 		Date date = new Date();
 		long idlongo = date.getTime();
-		String id = String.valueOf(idlongo);
-		id = id.substring(id.length() - 7);
+		String id = String.valueOf( idlongo );
+		id = id.substring( id.length() - 7 );
 		return id;
 	}
 

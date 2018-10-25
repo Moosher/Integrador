@@ -33,21 +33,17 @@
 						<br/>
 						<form action=<%=AppConsts.CAMINHO+"/RetornoRoteiroServlet" %>	method="post">					
 							<% 
-								List<Objeto> listagem = new ArrayList();
+									
+								
 								int i = 0;
-								for(Roteiro roteiro : roteiros.getRoteiroList()){
-									
-									listagem.addAll(roteiro.getObjetosRoteiro());
-									
+								for(Objeto objeto : roteiros.getObjetoRoteiroList(request.getParameter( "id" ))){
+										
 									out.println("<div class=form-group form-check>");
-									out.println("<input type=checkbox class=form-check-input>"+listagem.get( i ).toString(  ) );
+									out.println("<input type=checkbox class=form-check-input>"+objeto.getCodigoLocalizador());
 									out.println("</div>");
-									if(listagem.size() == i){
-										break;
-									}
-									i++;
-								}	
-							
+								}
+								
+						
  							%>
 														
 							<button class="btn btn-primary" id="btnsbt" type="submit">Finalizar</button>
