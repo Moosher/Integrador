@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
 import com.google.gson.Gson;
 
 import model.Veiculo;
@@ -20,36 +21,35 @@ public class ArquivoVeiculoDao implements VeiculoDao {
 	private static List<Veiculo> veiculos = new ArrayList();
 
 	@Override
-	public void adicionarVeiculo(Veiculo veiculo) {
-		veiculo.setId(FileControl.getInstance().gerarId());
-		this.veiculos.add(veiculo);
-		try {
-			salvarArquivo();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void removerVeiculo(Veiculo veiculo) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setDisponivel(Veiculo veiculo, boolean disponivel) {
-		veiculos.get(veiculos.indexOf(veiculo)).setDisponivel(disponivel);
+	public void adicionarVeiculo( Veiculo veiculo ) {
+		veiculo.setId( FileControl.getInstance().gerarId() );
+		veiculos.add( veiculo );
 		try {
 			this.salvarArquivo();
-		} catch (IOException e) {
+		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
-		
 	}
-	
+
+	@Override
+	public void removerVeiculo( Veiculo veiculo ) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setDisponivel( Veiculo veiculo, boolean disponivel ) {
+		veiculos.get( veiculos.indexOf( veiculo ) ).setDisponivel( disponivel );
+		try {
+			this.salvarArquivo();
+		} catch ( IOException e ) {
+			e.printStackTrace();
+		}
+
+	}
+
 	@Override
 	public List<Veiculo> getVeiculoList() {
-		// TODO Auto-generated method stub
 		return veiculos;
 	}
 
@@ -57,13 +57,13 @@ public class ArquivoVeiculoDao implements VeiculoDao {
 
 		Gson gson = new Gson();
 		FileWriter lstJson = null;
-		String lstVeiculo = gson.toJson(veiculos);
+		String lstVeiculo = gson.toJson( veiculos );
 
 		try {
-			lstJson = new FileWriter(AppConsts.CAMINHO_VEICULO, false);
-			lstJson.write(lstVeiculo);
+			lstJson = new FileWriter( AppConsts.CAMINHO_VEICULO, false );
+			lstJson.write( lstVeiculo );
 
-		} catch (IOException e) {
+		} catch ( IOException e ) {
 			e.printStackTrace();
 		} finally {
 			lstJson.close();
@@ -73,15 +73,15 @@ public class ArquivoVeiculoDao implements VeiculoDao {
 
 	@Override
 	public void carregarArquivo() throws IOException {
-		File file = new File(AppConsts.CAMINHO_VEICULO);
-		if (file.exists()) {
+		File file = new File( AppConsts.CAMINHO_VEICULO );
+		if ( file.exists() ) {
 			BufferedReader lstVeiculo = null;
 			Gson gson = new Gson();
 			try {
-				lstVeiculo = new BufferedReader(new FileReader(AppConsts.CAMINHO_VEICULO));
-				Veiculo[] veiculoArray = gson.fromJson(lstVeiculo, Veiculo[].class);
+				lstVeiculo = new BufferedReader( new FileReader( AppConsts.CAMINHO_VEICULO ) );
+				Veiculo[] veiculoArray = gson.fromJson( lstVeiculo, Veiculo[].class );
 				veiculos.clear();
-				veiculos.addAll(Arrays.asList(veiculoArray));
+				veiculos.addAll( Arrays.asList( veiculoArray ) );
 
 			} finally {
 				lstVeiculo.close();
@@ -92,11 +92,12 @@ public class ArquivoVeiculoDao implements VeiculoDao {
 	}
 
 	Comparator<Veiculo> cmp = new Comparator<Veiculo>() {
+
 		@Override
-		public int compare(Veiculo veiculo1, Veiculo veiculo2) {
-			if (veiculo1.getPrioridade() > veiculo2.getPrioridade()) {
+		public int compare( Veiculo veiculo1, Veiculo veiculo2 ) {
+			if ( veiculo1.getPrioridade() > veiculo2.getPrioridade() ) {
 				return -1;
-			} else if (veiculo1.getPrioridade() == veiculo2.getPrioridade()) {
+			} else if ( veiculo1.getPrioridade() == veiculo2.getPrioridade() ) {
 				return 0;
 			} else {
 				return 1;
@@ -104,6 +105,5 @@ public class ArquivoVeiculoDao implements VeiculoDao {
 
 		}
 	};
-
 
 }

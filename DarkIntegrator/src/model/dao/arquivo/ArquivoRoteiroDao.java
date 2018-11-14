@@ -47,14 +47,13 @@ public class ArquivoRoteiroDao implements RoteiroDao {
 
 	@Override
 	public List<Objeto> getObjetoRoteiroList( String id ) {
-		List<Objeto> lst = new ArrayList();
 		for ( Roteiro roteiro : roteiros ) {
 			if ( roteiro.getId().equals( id ) ) {
 				return roteiro.getObjetosRoteiro();
 			}
 		}
-		return lst;
 
+		return null;
 	}
 
 	@Override

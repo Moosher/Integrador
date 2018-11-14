@@ -30,6 +30,8 @@
 						</p>
 						<jsp:include page="/includes/modal.jsp" />
 						<button class="btn btn-primary" data-toggle="modal" data-target=".modalCaminhoes">Organizar Entregas</button>  
+						<jsp:include page="/ui.cadastro/alterarMotorista.jsp" />
+						<button class="btn btn-primary" data-toggle="modal" data-target=".modalMOT">Organizar MOT</button>  
 					</div>
 					
 					<div class="card">
@@ -71,6 +73,9 @@
 		<script type="text/javascript" src="js/scrollercdn.js"></script>
 		<script type="text/javascript" src="js/ui.js"></script>
 		<script type="text/javascript">
+		
+		
+		
 			// 			$(function(){
 			<%-- 				<% if(session.getAttribute( "usuario" ) == null)response.sendRedirect( AppConsts.CAMINHO+"/index.jsp" );%> --%>
 			// 			})			

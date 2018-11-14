@@ -1,13 +1,14 @@
 package control;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import resources.AppConsts;
 
 /**
  * Servlet implementation class RetornoRoteiroServlet
@@ -39,10 +40,12 @@ public class RetornoRoteiroServlet extends HttpServlet {
 	@Override
 	protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String marca = request.getParameter( "marca" );
+		String ano = request.getParameter( "ano" );
+		String placa = request.getParameter( "placa" );
 
-		PrintWriter test = response.getWriter();
-		test.println( request.getParameter( "teste" ) );
-
+		System.out.println( marca + " " + ano + " " + placa );
+		response.sendRedirect( AppConsts.CAMINHO + "/home.jsp" );
 	}
 
 }

@@ -34,7 +34,6 @@
 						<form action=<%=AppConsts.CAMINHO+"/RetornoRoteiroServlet" %>	method="post">					
 							<% 
 									
-								
 								int i = 0;
 								for(Objeto objeto : roteiros.getObjetoRoteiroList(request.getParameter( "id" ))){
 										
@@ -42,7 +41,6 @@
 									out.println("<input type=checkbox class=form-check-input>"+objeto.getCodigoLocalizador());
 									out.println("</div>");
 								}
-								
 						
  							%>
 														

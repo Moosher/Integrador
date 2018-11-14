@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import model.Objeto.Status;
 import model.dao.DaoFactory;
 import model.dao.ObjetoDao;
@@ -16,54 +17,54 @@ public class Roteiro {
 
 	private Date data;
 
-	private List<Objeto> objetosRoteiro = new ArrayList();
+	private List<Objeto> objetosRoteiro;
 
 	int capacidade;
 
 	int carga = 0;
 
-	public Roteiro(Date data, Veiculo veiculo) {
+	public Roteiro( Date data, Veiculo veiculo ) {
 		this.data = data;
 		this.veiculo = veiculo;
 		this.capacidade = veiculo.getModelo().getCapacidade();
+		this.objetosRoteiro = new ArrayList<>( this.capacidade );
 		this.gerarRoteiro();
 	}
 
 	private void gerarRoteiro() {
 		try {
-			adicionaPendente();
-			adicionaPostado();
-		} catch (ParseException e) {
+			this.adicionaPendente();
+			this.adicionaPostado();
+		} catch ( ParseException e ) {
 			e.printStackTrace();
 		}
-		
 
 	}
 
 	public void adicionaPendente() throws ParseException {
 		ObjetoDao objetoDao = DaoFactory.getDaoFactory().getObjetoDao();
-		for (int i = 0; capacidade >= carga && i < objetoDao.getObjetoList().size(); i++) {
-			Objeto objetoPendente = objetoDao.getObjetoList().get(i);
-			
-			if(objetoPendente.getStatus().equals(Status.PENDENTE)) {
-				objetoPendente.setStatus(Status.EM_ENTREGA);
-				objetoDao.setStatus(objetoPendente, Status.EM_ENTREGA);
-				objetosRoteiro.add(objetoPendente);
+		for ( int i = 0; this.capacidade > this.carga && i < objetoDao.getObjetoList().size(); i++ ) {
+			Objeto objetoPendente = objetoDao.getObjetoList().get( i );
+
+			if ( objetoPendente.getStatus().equals( Status.PENDENTE ) ) {
+				objetoPendente.setStatus( Status.EM_ENTREGA );
+				objetoDao.setStatus( objetoPendente, Status.EM_ENTREGA );
+				this.objetosRoteiro.add( objetoPendente );
 				this.carga++;
-				
+
 			}
 		}
 	}
 
 	public void adicionaPostado() throws ParseException {
 		ObjetoDao objetoDao = DaoFactory.getDaoFactory().getObjetoDao();
-		for (int i = 0; capacidade >= carga && i < objetoDao.getObjetoList().size(); i++) {
-			Objeto objetoPostado = objetoDao.getObjetoList().get(i);
-			
-			if(objetoPostado.getStatus().equals(Status.POSTADO)) {
-				objetoPostado.setStatus(Status.EM_ENTREGA);
-				objetoDao.setStatus(objetoPostado, Status.EM_ENTREGA);
-				objetosRoteiro.add(objetoPostado);
+		for ( int i = 0; this.capacidade > this.carga && i < objetoDao.getObjetoList().size(); i++ ) {
+			Objeto objetoPostado = objetoDao.getObjetoList().get( i );
+
+			if ( objetoPostado.getStatus().equals( Status.POSTADO ) ) {
+				objetoPostado.setStatus( Status.EM_ENTREGA );
+				objetoDao.setStatus( objetoPostado, Status.EM_ENTREGA );
+				this.objetosRoteiro.add( objetoPostado );
 				this.carga++;
 			}
 		}
@@ -73,7 +74,7 @@ public class Roteiro {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId( String id ) {
 		this.id = id;
 	}
 
@@ -81,7 +82,7 @@ public class Roteiro {
 		return this.veiculo;
 	}
 
-	public void setVeiculo(Veiculo veiculo) {
+	public void setVeiculo( Veiculo veiculo ) {
 		this.veiculo = veiculo;
 	}
 
@@ -89,7 +90,7 @@ public class Roteiro {
 		return this.data;
 	}
 
-	public void setData(Date data) {
+	public void setData( Date data ) {
 		this.data = data;
 	}
 
@@ -97,12 +98,12 @@ public class Roteiro {
 		return this.objetosRoteiro;
 	}
 
-	public void setObjetosRoteiro(List<Objeto> objetosRoteiro) {
+	public void setObjetosRoteiro( List<Objeto> objetosRoteiro ) {
 		this.objetosRoteiro = objetosRoteiro;
 	}
 
 	@Override
 	public String toString() {
-		return "VeÃ­culo: " + this.veiculo.toString();
+		return "Veículo: " + this.veiculo.toString();
 	}
 }
