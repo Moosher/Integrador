@@ -8,12 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import resources.AppConsts;
-
 /**
  * Servlet implementation class RetornoRoteiroServlet
  */
-@WebServlet( "/RetornoRoteiroServlet" )
+@WebServlet("/RetornoRoteiroServlet")
 public class RetornoRoteiroServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -27,25 +25,23 @@ public class RetornoRoteiroServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String marca = request.getParameter( "marca" );
-		String ano = request.getParameter( "ano" );
-		String placa = request.getParameter( "placa" );
-
-		System.out.println( marca + " " + ano + " " + placa );
-		response.sendRedirect( AppConsts.CAMINHO + "/home.jsp" );
 	}
 
 }

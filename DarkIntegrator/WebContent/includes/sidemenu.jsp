@@ -7,7 +7,7 @@
 	<div class="sidebar-header">
 		<h3 id="menu"><i class="fas fa-align-left"></i> MENU</h3>
 	</div>
-	<div id="empnome"><p>Transportadora Entrega Rápida</p></div>
+	<div id="empnome"><p id="pempnome">Transportadora Entrega Rápida</p></div>
 	<ul class="list-unstyled components">
 		
 		<li><a href=<%=AppConsts.CAMINHO + "/home.jsp" %>><i class="fa fa-home"></i>Home</a> 
@@ -15,38 +15,38 @@
 			<a href="#cadastroSub" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle dropA"><i class="fa fa-address-book"></i>Cadastro</a>
 			<ul class="collapse list-unstyled dropC" id="cadastroSub">
 				<li>
-					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/cadastroObjeto.jsp" %>><i class="fa fa-book-open"></i>Objeto</a>
+					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/cadastroObjeto.jsp" %>><i class="fa fa-box"></i>Objeto</a>
 				</li>
 				<li>
-					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/cadastroMotorista.jsp" %>><i class="fa fa-book-open"></i>Motorista</a>
+					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/cadastroMotorista.jsp" %>><i class="fa fa-user-circle"></i>Motorista</a>
 				</li>
 				<li>
-					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/cadastroVeiculo.jsp" %>><i class="fa fa-book-open"></i>Veículo</a>
+					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/cadastroVeiculo.jsp" %>><i class="fa fa-truck"></i>Veículo</a>
 				</li>
 			</ul>
 		</li>
 		<li >
-			<a href="#roteiro" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle dropA"><i class="fa fa-chevron-circle-right"></i>Roteiro</a>
+			<a href="#roteiro" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle dropA"><i class="fa fa-code-branch"></i>Roteiro</a>
 			<ul class="collapse list-unstyled dropC" id="roteiro">
 				<li>
 					<a href=<%= AppConsts.CAMINHO + "/CadastroRoteiroServlet" %>><i class="fa fa-truck-loading"></i>Gerar Roteiro</a>
 				</li>
 				<li>
-					<a href=<%= AppConsts.CAMINHO + "/roteiro/listarRoteiros.jsp" %>><i class="fa fa-eye"></i>Visualizar Roteiros</a>
+					<a href=<%= AppConsts.CAMINHO + "/roteiro/listarRoteiros.jsp" %>><i class= "fa fa-file-alt"></i>Visualizar Roteiros</a>
 				</li>
 			</ul>
 		</li>
 		<li>
-			<a href="#relatorio" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle dropA">Relatório</a>
+			<a href="#relatorio" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle dropA"><i class= "fa fa-file-alt"></i>Relatório</a>
 			<ul class="collapse list-unstyled dropC" id="relatorio">
 				<li>
-					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/relatorio/relatorioObjeto.jsp" %>>Objetos</a>
+					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/relatorio/relatorioObjeto.jsp" %>><i class="fa fa-box"></i>Objetos</a>
 				</li>
 				<li>
-					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/relatorio/relatorioMotorista.jsp" %>>Motorista</a>
+					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/relatorio/relatorioMotorista.jsp" %>><i class="fa fa-user-circle"></i>Motorista</a>
 				</li>
 				<li>
-					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/relatorio/relatorioVeiculo.jsp" %>>Veículo</a>
+					<a href=<%=AppConsts.CAMINHO + "/ui.cadastro/relatorio/relatorioVeiculo.jsp" %>><i class="fa fa-truck"></i>Veículo</a>
 				</li>
 			</ul>
 		</li>
