@@ -7,10 +7,8 @@ body {
 }
 
 h2{
-	
 	font-size: 70px;
 }
-
 
 #home{
 	background-color: #ffffff;
@@ -39,6 +37,13 @@ svg{
 #trlabels{
     background: #17a2b8;
     color: #ffffff;
+}
+
+.sliderCont{
+	align: center;
+	width: 40%;
+	
+	
 }
 
 /* ---------------------------------------------------
@@ -128,7 +133,6 @@ svg{
 	border-color: #ff8533;
 
 }
-
 
 /* ---------------------------------------------------
     Modal

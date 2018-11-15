@@ -80,9 +80,6 @@
 
 							i++;
 						}
-						
-						
-						
 						%>						
 						
 				<div class="modal-footer">
