@@ -27,7 +27,20 @@
 			<div class="content">
 				<jsp:include page="/includes/header.jsp" />
 				<div class="container cadcont">				
-						<h3>Selecione um Roteiro</h3>	
+						<h3>Roteiros</h3>	
+						
+						<form action=### method="post">
+							<div class="input-group" >
+								<div class="input-group-prepend">
+									<label class="input-group-text">Busca por Data</label>
+								</div>
+							<input class="form-control" type="date" style="width:20%" />
+								<div class="input-group-append" >
+									<button type="submit" class="btn btn-primary" >Buscar</button>
+								</div>
+							</div>
+						</form>
+						
 						<br/>
 						
 					<%
