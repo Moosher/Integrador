@@ -23,7 +23,7 @@ public class ArquivoModeloDao implements ModeloDao {
 	@Override
 	public void adicionarModelo( Modelo modelo ) {
 		modelo.setId( FileControl.getInstance().gerarId() );
-		this.modelos.add( modelo );
+		modelos.add( modelo );
 		try {
 			this.salvarArquivo();
 		} catch ( IOException e ) {
@@ -83,10 +83,10 @@ public class ArquivoModeloDao implements ModeloDao {
 
 	@Override
 	public void salvarPreDefinidos() {
-		if ( this.modelos.isEmpty() ) {
-			this.modelos.add( new Modelo( 10, "Carreta" ) );
-			this.modelos.add( new Modelo( 3, "Caminhão Báu" ) );
-			this.modelos.add( new Modelo( 1, "Van" ) );
+		if ( modelos.isEmpty() ) {
+			modelos.add( new Modelo( 10, "Carreta" ) );
+			modelos.add( new Modelo( 3, "Caminhão Báu" ) );
+			modelos.add( new Modelo( 1, "Van" ) );
 		}
 	}
 

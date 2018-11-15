@@ -16,6 +16,10 @@ h2{
 	background-color: #ffffff;
 }
 
+#pempnome{
+	margin: 0px;
+}
+
 #empnome{
 	font-family: 'Bungee Inline', cursive;
 	background: #6d7fcc;
@@ -30,6 +34,11 @@ svg{
 	width: 18rem; 
 	float: left; 
 	margin:10px;
+}
+
+#trlabels{
+    background: #17a2b8;
+    color: #ffffff;
 }
 
 /* ---------------------------------------------------
@@ -141,6 +150,14 @@ th.thbtn{
 	width: 1px;
 }
 
+.half-rule{
+	margin: 0px;
+	margin-bottom:10px;
+}
+
+.modal-footer {
+  border-top: none;
+}
 /* ---------------------------------------------------
     SIDEBAR
 ----------------------------------------------------- */

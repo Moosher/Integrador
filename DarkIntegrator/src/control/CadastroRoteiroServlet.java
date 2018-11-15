@@ -1,7 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -13,30 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.DaoFactory;
 import model.dao.RoteiroDao;
 import resources.AppConsts;
-import resources.GerenciadorData;
 
 @WebServlet("/CadastroRoteiroServlet")
 public class CadastroRoteiroServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public CadastroRoteiroServlet() {
-		super();
+    public CadastroRoteiroServlet() {
+	super();
 
-	}
+    }
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		try {
-			RoteiroDao roteiro = DaoFactory.getDaoFactory().getRoteiroDao();
-			Date data = GerenciadorData.getInstance().dateAtual();
-			roteiro.gerarRoteiros(data);
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
 
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		response.sendRedirect(AppConsts.CAMINHO + "/home.jsp");
-	}
+	RoteiroDao roteiro = DaoFactory.getDaoFactory().getRoteiroDao();
+	Date data = new Date();
+	roteiro.gerarRoteiros(data);
+
+	response.sendRedirect(AppConsts.CAMINHO + "/home.jsp");
+    }
 
 }

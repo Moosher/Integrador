@@ -3,12 +3,12 @@ package model;
 public class Veiculo {
 
 	private String id;
-	
+
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId( String id ) {
 		this.id = id;
 	}
 
@@ -39,7 +39,7 @@ public class Veiculo {
 		return this.disponivel;
 	}
 
-	public void setDisponivel(boolean disponivel) {
+	public void setDisponivel( boolean disponivel ) {
 		this.disponivel = disponivel;
 	}
 
@@ -94,7 +94,7 @@ public class Veiculo {
 	@Override
 	public String toString() {
 		if ( this.motorista == null ) {
-			return this.modelo.getNome() + " " + this.marca + ", placa: " + this.placa + ", motorista: motorista n√£o alocado.";
+			return this.modelo.getNome() + " " + this.marca + ", placa: " + this.placa + ", motorista: motorista n„o alocado.";
 
 		} else {
 			return this.modelo.getNome() + " " + this.marca + ", placa: " + this.placa + ", motorista: " + this.motorista.getNome() + ", CNH: " + this.motorista.getCNH();
