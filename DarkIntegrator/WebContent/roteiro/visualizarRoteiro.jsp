@@ -1,3 +1,5 @@
+<%@page import="model.Veiculo"%>
+<%@page import="model.dao.VeiculoDao"%>
 <%@page import="model.dao.DaoFactory"%>
 <%@page import="model.dao.RoteiroDao"%>
 <%@page import="java.util.List"%>
@@ -9,6 +11,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 	RoteiroDao roteiros = DaoFactory.getDaoFactory().getRoteiroDao();
+	VeiculoDao veiculos = DaoFactory.getDaoFactory().getVeiculoDao();
 %>
 <!DOCTYPE html>
 <html>
@@ -30,21 +33,68 @@
 				<div class="container cadcont">
 					<div class="form-group">
 						<h3>Retorno</h3>
+						<%
+							for(Veiculo veiculo : veiculos.getVeiculoList()){
+								if(veiculo.getId().equals(request.getParameter("veiculo"))){
+									out.println("<h4 class=ola>"+veiculo.getModelo().getNome() +"  |  "+ veiculo.getMotorista().getNome()+"</h4>");
+									break;
+								}
+							}						
+						%>
 						<br/>
 						<form action=<%=AppConsts.CAMINHO+"/RetornoRoteiroServlet" %>	method="post">					
 							<% 
-									
 								int i = 0;
 								for(Objeto objeto : roteiros.getObjetoRoteiroList(request.getParameter( "id" ))){
-										
-									out.println("<div class=form-group form-check>");
-									out.println("<input name=param"+i+" type=checkbox class=form-check-input>"+objeto.getCodigoLocalizador());
+									out.println("<ul style='margin-top:10px; padding:0px;' class=list-unstyled id=alt"+i+">");
+									out.println("<li class=list-unstyled>");
+									
+									out.println("<table style=width:100% >");
+									
+									out.println("<tr id=trlabels >");						
+									out.println("<td>Código Loc.</td>");
+									out.println("<td>Destinatário</td>");
+									out.println("<td>Endereço</td>");
+									out.println("<td>Data de Depósito</td>");							
+									out.println("</tr>");
+									
+									out.println("<tr>");							
+									out.println("<td>");						
+									out.println("<input class=form-control name=codloc value="+objeto.getCodigoLocalizador()+" disabled />");
+									out.println("</td>");						
+									out.println("<td>");						
+									out.println("<input class=form-control name=nomeDestinatario value="+objeto.getNomeD()+" disabled />");
+									out.println("</td>");						
+									out.println("<td>");						
+									out.println("<input class=form-control name=enderecoDestinatario value="+objeto.getEnderecoD()+" disabled />");
+									out.println("</td>");						
+									out.println("<td>");						
+									out.println("<input class=form-control name=data value="+objeto.getDataDeposito()+" disabled />");
+									out.println("</td>");						
+									out.println("<tr>");
+									
+									out.println("</table>");
+									
+									out.println("<div class='input-group' >");
+									out.println("<div class='input-group-prepend' >");
+									out.println("<label class='input-group-text'>Status</label>");
 									out.println("</div>");
+									
+									out.println("<select class=custom-select name=motorista>");
+									out.println("<option value=ausente>Não Entregue</option>");
+									out.println("<option value=entregue>Entregue</option>");						
+									out.println("</select>");									
+									out.println("</div>");
+									
+									out.println("</li>");
+									out.println("</ul>");
+									out.println("<hr class=half-rule />");
+
+									i++;
 								}
-						
- 							%>
-														
-							<button class="btn btn-primary" id="btnsbt" type="submit">Finalizar</button>
+							%>	
+																		
+							<button class="btn btn-primary " id="btnsbt" type="submit">Finalizar</button>
 							<a class="btn btn-danger" href=<%=AppConsts.CAMINHO + "/home.jsp" %>>Voltar</a>
 						</form>
 					</div>
