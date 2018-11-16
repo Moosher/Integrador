@@ -7,13 +7,15 @@ import model.Motorista;
 
 public interface MotoristaDao {
 
-	void adicionarMotorista( Motorista motorista );
+    void adicionarMotorista( Motorista motorista );
 
-	void removerMotorista( Motorista motorista );
+    void removerMotorista( String motoristaId );
 
-	List<Motorista> getMotoristaList();
+    List<Motorista> getMotoristaList();
 
-	void carregarArquivo() throws IOException;
+    void carregarArquivo() throws IOException;
 
-	void setDisponivel( Motorista motorista, boolean disponivel );
+    void setDisponivel( String motoristaId, boolean disponivel );
+
+    Motorista findMotoristaByPK(String motoristaId);
 }

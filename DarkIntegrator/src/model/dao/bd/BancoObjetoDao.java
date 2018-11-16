@@ -95,11 +95,11 @@ public class BancoObjetoDao implements ObjetoDao {
 	}
 
 	//TODO Fernando aqui não vai funcionar pq retorna uma lista de String, não objeto.
-	return null;
+	return lst;
     }
 
     @Override
-    public void removerObjeto( Objeto objeto ) {
+    public void removerObjeto( String objetoId ) {
 
     }
 
@@ -109,10 +109,16 @@ public class BancoObjetoDao implements ObjetoDao {
     }
 
     @Override
-    public void setStatus( Objeto objeto, Status status ) {
+    public void setStatus( String objetoId, Status status ) {
     }
 
     @Override
     public void carregarArquivo() throws IOException {
+    }
+
+    @Override
+    public Objeto findObjetoByPK(String objetoId) {
+	return null;
+
     }
 }

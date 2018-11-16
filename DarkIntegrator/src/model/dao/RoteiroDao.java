@@ -9,18 +9,22 @@ import model.Roteiro;
 
 public interface RoteiroDao {
 
-	void adicionarRoteiro( Roteiro roteiro );
+    void adicionarRoteiro( Roteiro roteiro );
 
-	void removerRoteiro( Roteiro roteiro );
+    void removerRoteiro( String roteiroId );
 
-	void atualizarRoteiro( Roteiro roteiro );
+    void atualizarRoteiro( Roteiro roteiro );
 
-	void gerarRoteiros( Date data );
+    void gerarRoteiros( Date data );
 
-	List<Roteiro> getRoteiroList();
+    List<Roteiro> getRoteiroList();
 
-	List<Objeto> getObjetoRoteiroList( String id );
+    List<Roteiro> getRoteiroList(Date data);
 
-	void carregarArquivo() throws IOException;
+    List<Objeto> getObjetoRoteiroList( String id );
+
+    void carregarArquivo() throws IOException;
+
+    Roteiro findRoteiroByID(String roteiroId);
 
 }

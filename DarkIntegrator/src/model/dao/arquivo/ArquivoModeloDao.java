@@ -18,91 +18,96 @@ import resources.AppConsts;
 
 public class ArquivoModeloDao implements ModeloDao {
 
-	private static List<Modelo> modelos = new ArrayList();
+    private static List<Modelo> modelos = new ArrayList();
+
+    @Override
+    public void adicionarModelo( Modelo modelo ) {
+	modelo.setId( FileControl.getInstance().gerarId() );
+	modelos.add( modelo );
+	try {
+	    this.salvarArquivo();
+	} catch ( IOException e ) {
+	    e.printStackTrace();
+	}
+    }
+
+    @Override
+    public void removerModelo( String modeloId ) {
+	// TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public List<Modelo> getModeloList() {
+	// TODO Auto-generated method stub
+	return modelos;
+    }
+
+    public void salvarArquivo() throws IOException {
+
+	Gson gson = new Gson();
+	FileWriter lstJson = null;
+	String lstModelo = gson.toJson( modelos );
+
+	try {
+	    lstJson = new FileWriter( AppConsts.CAMINHO_MODELO, false );
+	    lstJson.write( lstModelo );
+
+	} catch ( IOException e ) {
+	    e.printStackTrace();
+	} finally {
+	    lstJson.close();
+	}
+
+    }
+
+    @Override
+    public void carregarArquivo() throws IOException {
+	File file = new File( AppConsts.CAMINHO_MODELO );
+	if ( file.exists() ) {
+	    BufferedReader lstModelo = null;
+	    Gson gson = new Gson();
+	    try {
+		lstModelo = new BufferedReader( new FileReader( AppConsts.CAMINHO_MODELO ) );
+		Modelo[] modeloArray = gson.fromJson( lstModelo, Modelo[].class );
+		modelos.clear();
+		modelos.addAll( Arrays.asList( modeloArray ) );
+
+	    } finally {
+		lstModelo.close();
+	    }
+	} else {
+	    this.salvarArquivo();
+	}
+    }
+
+    @Override
+    public void salvarPreDefinidos() {
+	if ( modelos.isEmpty() ) {
+	    modelos.add( new Modelo("1",10, "Carreta" ) );
+	    modelos.add( new Modelo("2", 3, "Caminhão Báu" ) );
+	    modelos.add( new Modelo("3", 1, "Van" ) );
+	}
+    }
+
+    Comparator<Modelo> cmp = new Comparator<Modelo>() {
 
 	@Override
-	public void adicionarModelo( Modelo modelo ) {
-		modelo.setId( FileControl.getInstance().gerarId() );
-		modelos.add( modelo );
-		try {
-			this.salvarArquivo();
-		} catch ( IOException e ) {
-			e.printStackTrace();
-		}
+	public int compare( Modelo modelo1, Modelo modelo2 ) {
+
+	    if ( modelo1.getCapacidade() > modelo2.getCapacidade() ) {
+		return -1;
+	    } else if ( modelo1.getCapacidade() == modelo2.getCapacidade() ) {
+		return 0;
+	    } else {
+		return 1;
+	    }
 	}
+    };
 
-	@Override
-	public void removerModelo( Modelo modelo ) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<Modelo> getModeloList() {
-		// TODO Auto-generated method stub
-		return modelos;
-	}
-
-	public void salvarArquivo() throws IOException {
-
-		Gson gson = new Gson();
-		FileWriter lstJson = null;
-		String lstModelo = gson.toJson( modelos );
-
-		try {
-			lstJson = new FileWriter( AppConsts.CAMINHO_MODELO, false );
-			lstJson.write( lstModelo );
-
-		} catch ( IOException e ) {
-			e.printStackTrace();
-		} finally {
-			lstJson.close();
-		}
-
-	}
-
-	@Override
-	public void carregarArquivo() throws IOException {
-		File file = new File( AppConsts.CAMINHO_MODELO );
-		if ( file.exists() ) {
-			BufferedReader lstModelo = null;
-			Gson gson = new Gson();
-			try {
-				lstModelo = new BufferedReader( new FileReader( AppConsts.CAMINHO_MODELO ) );
-				Modelo[] modeloArray = gson.fromJson( lstModelo, Modelo[].class );
-				modelos.clear();
-				modelos.addAll( Arrays.asList( modeloArray ) );
-
-			} finally {
-				lstModelo.close();
-			}
-		} else {
-			this.salvarArquivo();
-		}
-	}
-
-	@Override
-	public void salvarPreDefinidos() {
-		if ( modelos.isEmpty() ) {
-			modelos.add( new Modelo( 10, "Carreta" ) );
-			modelos.add( new Modelo( 3, "Caminhão Báu" ) );
-			modelos.add( new Modelo( 1, "Van" ) );
-		}
-	}
-
-	Comparator<Modelo> cmp = new Comparator<Modelo>() {
-
-		@Override
-		public int compare( Modelo modelo1, Modelo modelo2 ) {
-
-			if ( modelo1.getCapacidade() > modelo2.getCapacidade() ) {
-				return -1;
-			} else if ( modelo1.getCapacidade() == modelo2.getCapacidade() ) {
-				return 0;
-			} else {
-				return 1;
-			}
-
-		}
-	};
+    @Override
+    public Modelo findModeloByPK(String id) {
+	// TODO Auto-generated method stub
+	return null;
+    }
 }

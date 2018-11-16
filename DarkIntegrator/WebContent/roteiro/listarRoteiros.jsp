@@ -1,3 +1,5 @@
+<%@page import="resources.GerenciadorData"%>
+<%@page import="java.util.Date"%>
 <%@page import="model.dao.RoteiroDao"%>
 <%@page import="model.dao.DaoFactory"%>
 <%@page import="model.Roteiro"%>
@@ -7,7 +9,16 @@
 	pageEncoding="ISO-8859-1"%>
 	
 <%
+	String dataString = request.getParameter("data");
+	Date data;
+	
+	if(!dataString.isEmpty()){
+	    data = new Date();
+	}else{
+	    data = GerenciadorData.getInstance().strToDate(dataString);
+	}
 	RoteiroDao roteiros = DaoFactory.getDaoFactory().getRoteiroDao();
+	roteiros.getRoteiroList(data);
 %>
 <!DOCTYPE html>
 <html>
@@ -36,7 +47,7 @@
 								</div>
 							<input class="form-control" type="date" style="width:20%" />
 								<div class="input-group-append" >
-									<button type="submit" class="btn btn-primary" >Buscar</button>
+									<button type="submit" name="data" class="btn btn-primary" >Buscar</button>
 								</div>
 							</div>
 						</form>

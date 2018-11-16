@@ -3,10 +3,14 @@ package model.dao.bd;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import model.Motorista;
+import model.dao.DaoFactory;
 import model.dao.MotoristaDao;
 
 public class BancoMotoristaDao implements MotoristaDao {
@@ -49,13 +53,58 @@ public class BancoMotoristaDao implements MotoristaDao {
     }
 
     @Override
-    public void removerMotorista( Motorista motorista ) {
+    public void removerMotorista( String motoristaId ) {
 
     }
 
     @Override
     public List<Motorista> getMotoristaList() {
-	return null;
+	List<Motorista> lst = new ArrayList();
+	Connection conn = DatabaseService.getConnection();
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	Motorista motorista = null;
+
+	try {
+	    ps = conn.prepareStatement("SELECT * FROM MOTORISTA");
+	    rs = ps.executeQuery();
+
+	    while(rs.next()) {
+		String nome = rs.getString(2);
+		Date dataNasc = rs.getDate(3);
+		String endereco = rs.getString(4);
+		String tipoCNH = rs.getString(5);
+		char cNH = rs.getString(6).charAt(0);
+		String disponivelString = rs.getString(7);
+
+		boolean disponivel;
+
+		if (disponivelString.equalsIgnoreCase("T")) {
+		    disponivel = true;
+		} else {
+		    disponivel = false;
+		}
+
+		DaoFactory daoFactory = DaoFactory.getDaoFactory();
+
+		motorista = new Motorista(nome, dataNasc, endereco, cNH, tipoCNH, disponivel);
+		lst.add(motorista);
+	    }
+
+	} catch (SQLException e) {
+	    e.printStackTrace();
+
+	} finally {
+	    try {
+		ps.close();
+		rs.close();
+		conn.close();
+	    } catch (SQLException e) {
+		e.printStackTrace();
+	    }
+	}
+
+	return lst;
     }
 
     @Override
@@ -64,8 +113,54 @@ public class BancoMotoristaDao implements MotoristaDao {
     }
 
     @Override
-    public void setDisponivel( Motorista motorista, boolean disponivel ) {
+    public void setDisponivel( String motoristaId, boolean disponivel ) {
 
     }
 
+    @Override
+    public Motorista findMotoristaByPK(String motoristaId) {
+	Connection conn = DatabaseService.getConnection();
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	Motorista motorista = null;
+
+	try {
+	    ps = conn.prepareStatement("SELECT * FROM MOTORISTA where motorista.motoristaid = ? ;");
+	    ps.setString(1, motoristaId);
+	    rs = ps.executeQuery();
+
+	    String nome = rs.getString(2);
+	    Date dataNasc = rs.getDate(3);
+	    String endereco = rs.getString(4);
+	    String tipoCNH = rs.getString(5);
+	    char cNH = rs.getString(6).charAt(0);
+	    String disponivelString = rs.getString(7);
+
+	    boolean disponivel;
+
+	    if (disponivelString.equalsIgnoreCase("T")) {
+		disponivel = true;
+	    } else {
+		disponivel = false;
+	    }
+
+	    DaoFactory daoFactory = DaoFactory.getDaoFactory();
+
+	    motorista = new Motorista(nome, dataNasc, endereco, cNH, tipoCNH, disponivel);
+
+	} catch (SQLException e) {
+	    e.printStackTrace();
+
+	} finally {
+	    try {
+		ps.close();
+		rs.close();
+		conn.close();
+	    } catch (SQLException e) {
+		e.printStackTrace();
+	    }
+	}
+
+	return motorista;
+    }
 }

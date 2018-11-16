@@ -48,7 +48,7 @@ public class Roteiro {
 
 	    if ( objetoPendente.getStatus().equals( Status.PENDENTE ) ) {
 		objetoPendente.setStatus( Status.EM_ENTREGA );
-		objetoDao.setStatus( objetoPendente, Status.EM_ENTREGA );
+		objetoDao.setStatus( objetoPendente.getId(), Status.EM_ENTREGA );
 		this.objetosRoteiro.add( objetoPendente );
 		this.carga++;
 
@@ -63,7 +63,7 @@ public class Roteiro {
 
 	    if ( objetoPostado.getStatus().equals( Status.POSTADO ) ) {
 		objetoPostado.setStatus( Status.EM_ENTREGA );
-		objetoDao.setStatus( objetoPostado, Status.EM_ENTREGA );
+		objetoDao.setStatus( objetoPostado.getId(), Status.EM_ENTREGA );
 		this.objetosRoteiro.add( objetoPostado );
 		this.carga++;
 	    }

@@ -17,93 +17,99 @@ import resources.AppConsts;
 
 public class ArquivoUsuarioDao implements UsuarioDao {
 
-	Map<String, String> usuarios;
+    Map<String, String> usuarios;
 
-	public ArquivoUsuarioDao() {
-		if (this.usuarios == null) {
-			this.usuarios = new HashMap();
-			this.usuarios.put("fernando", "fernando");
-		}
+    public ArquivoUsuarioDao() {
+	if (this.usuarios == null) {
+	    this.usuarios = new HashMap();
+	    this.usuarios.put("fernando", "fernando");
 	}
+    }
 
-	@Override
-	public void adicionarUsuario(String nome, String senha) {
+    @Override
+    public void adicionarUsuario(String nome, String senha) {
 
-		if (this.usuarios.get(nome) == null) {
-			this.usuarios.put(nome, senha);
-			try {
-				this.salvarArquivo();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			new Usuario(nome, senha);
-		}
+	if (this.usuarios.get(nome) == null) {
+	    this.usuarios.put(nome, senha);
+	    try {
+		this.salvarArquivo();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
+	    new Usuario(nome, senha);
 	}
+    }
 
-	@Override
-	public Map<String, String> getUsuarios() {
-		return this.usuarios;
-	}
+    @Override
+    public Map<String, String> getUsuarios() {
+	return this.usuarios;
+    }
 
-	@Override
-	public boolean validacao(String login, String senha) {
+    @Override
+    public boolean validacao(String login, String senha) {
 
-		Set<String> chaves = this.usuarios.keySet();
+	Set<String> chaves = this.usuarios.keySet();
 
-		for (String chave : chaves) {
-			this.usuarios.get(chave);
-			if (login.equals(chave) && senha.equals(this.usuarios.get(chave))) {
-				return true;
-			}
-
-		}
-
-		return false;
-	}
-
-	@Override
-	public void removerUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
+	for (String chave : chaves) {
+	    this.usuarios.get(chave);
+	    if (login.equals(chave) && senha.equals(this.usuarios.get(chave))) {
+		return true;
+	    }
 
 	}
 
-	public void salvarArquivo() throws IOException {
+	return false;
+    }
 
-		Gson gson = new Gson();
-		FileWriter lstJson = null;
-		String lstUsuario = gson.toJson(this.usuarios);
+    @Override
+    public void removerUsuario(String usuarioId) {
+	// TODO Auto-generated method stub
 
-		try {
-			lstJson = new FileWriter(AppConsts.CAMINHO_USUARIO, false);
-			lstJson.write(lstUsuario);
+    }
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			lstJson.close();
-		}
+    public void salvarArquivo() throws IOException {
 
+	Gson gson = new Gson();
+	FileWriter lstJson = null;
+	String lstUsuario = gson.toJson(this.usuarios);
+
+	try {
+	    lstJson = new FileWriter(AppConsts.CAMINHO_USUARIO, false);
+	    lstJson.write(lstUsuario);
+
+	} catch (IOException e) {
+	    e.printStackTrace();
+	} finally {
+	    lstJson.close();
 	}
 
-	@Override
-	public void carregarArquivo() throws IOException {
-		File file = new File(AppConsts.CAMINHO_USUARIO);
-		if (file.exists()) {
-			BufferedReader lstUsuario = null;
-			Gson gson = new Gson();
-			try {
-				lstUsuario = new BufferedReader(new FileReader(AppConsts.CAMINHO_USUARIO));
-				Usuario[] usuarioArray = gson.fromJson(lstUsuario, Usuario[].class);
-				this.usuarios.clear();
-				// TODO Fernando..
-				// usuarios.addAll(Arrays.asList(usuarioArray));
+    }
 
-			} finally {
-				lstUsuario.close();
-			}
-		} else {
-			this.salvarArquivo();
-		}
+    @Override
+    public void carregarArquivo() throws IOException {
+	File file = new File(AppConsts.CAMINHO_USUARIO);
+	if (file.exists()) {
+	    BufferedReader lstUsuario = null;
+	    Gson gson = new Gson();
+	    try {
+		lstUsuario = new BufferedReader(new FileReader(AppConsts.CAMINHO_USUARIO));
+		Usuario[] usuarioArray = gson.fromJson(lstUsuario, Usuario[].class);
+		this.usuarios.clear();
+		// TODO Fernando..
+		// usuarios.addAll(Arrays.asList(usuarioArray));
+
+	    } finally {
+		lstUsuario.close();
+	    }
+	} else {
+	    this.salvarArquivo();
 	}
+    }
+
+    @Override
+    public Usuario findUsuarioByPK(String id) {
+	// TODO Auto-generated method stub
+	return null;
+    }
 
 }
