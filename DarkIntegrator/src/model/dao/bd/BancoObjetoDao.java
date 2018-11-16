@@ -1,6 +1,5 @@
 package model.dao.bd;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -109,10 +108,6 @@ public class BancoObjetoDao implements ObjetoDao {
 
     @Override
     public void setStatus( String objetoId, Status status ) {
-    }
-
-    @Override
-    public void carregarArquivo() throws IOException {
     }
 
     @Override

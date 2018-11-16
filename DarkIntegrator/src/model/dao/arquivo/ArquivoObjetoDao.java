@@ -5,12 +5,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import model.Objeto;
 import model.Objeto.Status;
@@ -19,34 +20,91 @@ import resources.AppConsts;
 
 public class ArquivoObjetoDao implements ObjetoDao {
 
-    private static List<Objeto> objetos = new ArrayList();
-
+    public ArquivoObjetoDao() {
+	File file = new File(AppConsts.CAMINHO_OBJETO);
+	if(!file.exists()) {
+	    List<Objeto> objetos = new ArrayList<>();
+	    this.salvarArquivo(objetos);
+	}
+    }
     @Override
     public void adicionarObjeto(Objeto objeto) {
+	List<Objeto> objetos = this.getObjetoList();
 	objeto.setId(FileControl.getInstance().gerarId());
-	ArquivoObjetoDao.objetos.add(objeto);
-	try {
-	    this.salvarArquivo();
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+	objetos.add(objeto);
+
+	this.salvarArquivo(objetos);
     }
 
     @Override
     public void removerObjeto(String objetoId) {
-	Objeto objeto = this.findObjetoByPK(objetoId);
-	ArquivoObjetoDao.objetos.remove(objeto);
+	// TODO Auto-generated method stub
+
+    }
+
+
+    @Override
+    public List<Objeto> getObjetoList() {
+	Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
+	List<Objeto> objetos = new ArrayList();
+	File file = new File(AppConsts.CAMINHO_OBJETO);
+	BufferedReader lstObjeto = null;
+	if(file.exists()) {
+	    try {
+		lstObjeto = new BufferedReader(new FileReader(AppConsts.CAMINHO_OBJETO));
+		Objeto[] objetoArray = gson.fromJson(lstObjeto, Objeto[].class);
+		objetos.clear();
+		objetos.addAll(Arrays.asList(objetoArray));
+	    }catch(IOException e) {
+		e.printStackTrace();
+	    } finally {
+		try {
+		    lstObjeto.close();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	return objetos;
+    }
+
+    private void salvarArquivo(List<Objeto> objetos) {
+	Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
+	FileWriter lstJson = null;
+	String lstObjeto = gson.toJson(objetos);
+
 	try {
-	    this.salvarArquivo();
+	    lstJson = new FileWriter(AppConsts.CAMINHO_OBJETO, false);
+	    lstJson.write(lstObjeto);
+
 	} catch (IOException e) {
 	    e.printStackTrace();
+	} finally {
+	    try {
+		lstJson.close();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
 	}
+
+    }
+
+    @Override
+    public Objeto findObjetoByPK(String objetoId) {
+	List<Objeto> objetos = this.getObjetoList();
+	for(Objeto objeto : objetos) {
+	    if(objeto.getId().equals(objetoId)) {
+		return objeto;
+	    }
+	}
+	return null;
     }
 
     @Override
     public boolean verificaCodigo(String codigo) {
-	if (!ArquivoObjetoDao.objetos.isEmpty()) {
-	    for (Objeto objeto : ArquivoObjetoDao.objetos) {
+	List<Objeto> objetos = this.getObjetoList();
+	if (!objetos.isEmpty()) {
+	    for (Objeto objeto : objetos) {
 		if (objeto.getCodigoLocalizador().equals(codigo)) {
 		    return false;
 		}
@@ -57,68 +115,20 @@ public class ArquivoObjetoDao implements ObjetoDao {
 
     @Override
     public void setStatus(String objetoId, Status status) {
-	Objeto objeto = this.findObjetoByPK(objetoId);
-	objetos.get(objetos.indexOf(objeto)).setStatus(status);
-	try {
-	    this.salvarArquivo();
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-
+	List<Objeto> objetos = this.getObjetoList();
+	int objetoIndex = this.findIndexByPK(objetoId);
+	objetos.get(objetoIndex).setStatus(status);
+	this.salvarArquivo(objetos);
     }
 
-    @Override
-    public List<Objeto> getObjetoList() throws ParseException {
-	// TODO FERNANDO vê como fica isso, antes tava retornando uma lista de String
-	return objetos;
-    }
 
-    public void salvarArquivo() throws IOException {
-
-	Gson gson = new Gson();
-	FileWriter lstJson = null;
-	String lstDeposito = gson.toJson(objetos);
-
-	try {
-	    lstJson = new FileWriter(AppConsts.CAMINHO_OBJETO, false);
-	    lstJson.write(lstDeposito);
-	    lstJson.close();
-
-	} catch (IOException e) {
-	    e.printStackTrace();
-	} finally {
-	    lstJson.close();
-	}
-
-    }
-
-    @Override
-    public void carregarArquivo() throws IOException {
-	File file = new File(AppConsts.CAMINHO_OBJETO);
-	if (file.exists()) {
-	    BufferedReader lstDeposito = null;
-	    Gson gson = new Gson();
-	    try {
-		lstDeposito = new BufferedReader(new FileReader(AppConsts.CAMINHO_OBJETO));
-
-		Objeto[] depositoArray = gson.fromJson(lstDeposito, Objeto[].class);
-		objetos.clear();
-		objetos.addAll(Arrays.asList(depositoArray));
-
-	    } finally {
-		lstDeposito.close();
+    public int findIndexByPK(String objetoId) {
+	List<Objeto> objetos = this.getObjetoList();
+	for(Objeto objeto : objetos) {
+	    if(objeto.getId().equals(objetoId)) {
+		return objetos.indexOf(objeto);
 	    }
-	} else {
-	    this.salvarArquivo();
 	}
+	return -1;
     }
-
-    @Override
-    public Objeto findObjetoByPK(String objetoId) {
-	return null;
-
-    }
-
-
-
 }

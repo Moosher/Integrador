@@ -1,6 +1,5 @@
 package model.dao.bd;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -98,11 +97,6 @@ public class BancoRoteiroDao implements RoteiroDao {
     }
 
     @Override
-    public void carregarArquivo() throws IOException {
-
-    }
-
-    @Override
     public List<Objeto> getObjetoRoteiroList( String id ) {
 	// TODO Auto-generated method stub
 	return null;
@@ -115,7 +109,7 @@ public class BancoRoteiroDao implements RoteiroDao {
     }
 
     @Override
-    public Roteiro findRoteiroByID(String id) {
+    public Roteiro findRoteiroByPK(String id) {
 	// TODO Auto-generated method stub
 	return null;
     }
