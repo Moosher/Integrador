@@ -32,7 +32,7 @@
 					<a href=<%= AppConsts.CAMINHO + "/CadastroRoteiroServlet" %>><i class="fa fa-truck-loading"></i>Gerar Roteiro</a>
 				</li>
 				<li>
-					<a href=<%= AppConsts.CAMINHO + "/roteiro/listarRoteiros.jsp" %>><i class= "fa fa-file-alt"></i>Visualizar Roteiros</a>
+					<a href=<%= AppConsts.CAMINHO + "/BuscaRoteiroServlet" %>><i class= "fa fa-file-alt"></i>Visualizar Roteiros</a>
 				</li>
 			</ul>
 		</li>

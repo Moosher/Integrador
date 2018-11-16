@@ -15,7 +15,7 @@ public class GerenciadorData {
 	}
 
 	public String dataAtual() {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "HH:mm dd/MM/yyyy" );
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy-MM-dd" );
 		LocalDateTime localDate = LocalDateTime.now();
 		String dataAtual = dtf.format( localDate );
 		return dataAtual;

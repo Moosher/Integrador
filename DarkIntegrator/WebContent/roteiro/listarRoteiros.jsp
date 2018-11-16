@@ -8,19 +8,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
-<%
-	String dataString = request.getParameter("data");
-	Date data;
-	
-	if(!dataString.isEmpty()){
-	    data = new Date();
-	}else{
-	    data = GerenciadorData.getInstance().strToDate(dataString);
-	}
-	RoteiroDao roteiros = DaoFactory.getDaoFactory().getRoteiroDao();
-	roteiros.getRoteiroList(data);
-%>
 <!DOCTYPE html>
+<%
+	RoteiroDao roteiros = DaoFactory.getDaoFactory().getRoteiroDao();
+
+	String data = request.getParameter( "data" );
+	roteiros.getRoteiroList(GerenciadorData.getInstance().strToDate( data ));
+%>
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
@@ -40,14 +34,14 @@
 				<div class="container cadcont">				
 						<h3>Roteiros</h3>	
 						
-						<form action=### method="post">
+						<form action=<%=AppConsts.CAMINHO + "/BuscaRoteiroServlet"%> method="post">
 							<div class="input-group" >
 								<div class="input-group-prepend">
 									<label class="input-group-text">Busca por Data</label>
 								</div>
-							<input class="form-control" type="date" style="width:20%" />
+							<input class="form-control" name="data" type="date" value='<%= data %>' />
 								<div class="input-group-append" >
-									<button type="submit" name="data" class="btn btn-primary" >Buscar</button>
+									<button type="submit" class="btn btn-primary" >Buscar</button>
 								</div>
 							</div>
 						</form>
