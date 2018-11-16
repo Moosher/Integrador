@@ -1,3 +1,4 @@
+<%@page import="org.apache.tomcat.util.codec.binary.StringUtils"%>
 <%@page import="model.dao.MotoristaDao"%>
 <%@page import="model.Motorista"%>
 <%@page import="model.Veiculo"%>
@@ -20,8 +21,16 @@
 						<%
 						int i = 0;
 						for(Veiculo veiculo : veiculos.getVeiculoList()){
+							
+							String testeNullNome = "Motorista não alocado";
+							String testeNullCNH = "";
+							if(veiculo.getMotorista() != null){
+								testeNullNome = veiculo.getMotorista().getNome();
+								testeNullCNH = ", CHN tipo "+veiculo.getMotorista().getTipoCNH();
+							}
+							
 							out.println("<form id=formmodal action="+AppConsts.CAMINHO +"/RetornoRoteiroServlet method=post>");
-							out.println("<a style='width:100%' href=#alt"+i+" data-toggle=collapse aria-expanded=false class='btn btn-primary btn-lg btn-block ola' >"+veiculo.getMotorista().getNome(  )+"</a>");
+							out.println("<a style='width:100%' href=#alt"+i+" data-toggle=collapse aria-expanded=false class='btn btn-primary btn-lg btn-block ola' >"+ testeNullNome +"</a>");
 							
 							out.println("<ul style='margin-top:10px; padding:0px;' class=collapse list-unstyled id=alt"+i+">");
 							out.println("<li class=list-unstyled>");
@@ -58,7 +67,7 @@
 							out.println("</div>");
 							
 							out.println("<select class=custom-select name=motorista>");
-							out.println("<option>"+veiculo.getMotorista().getNome()+", CHN tipo "+veiculo.getMotorista().getTipoCNH()+"</option>");
+							out.println("<option>"+testeNullNome + testeNullCNH+"</option>");
 							for( Motorista motorista : motoristas.getMotoristaList()){
 								if(motorista.isDisponivel()){
 									out.println("<option value="+i+">"+motorista.getNome()+", CHN tipo "+motorista.getTipoCNH()+"</option>");
@@ -80,6 +89,7 @@
 
 							i++;
 						}
+						
 						%>						
 						
 				<div class="modal-footer">
