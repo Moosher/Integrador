@@ -6,9 +6,9 @@ public class AppConsts {
 
     public static boolean BANCO;
 
-    // *****************************************************
-    // ATALHO PARA COMENTAR VARIAS LINHAS: CTRL + SHIFT + C
-    // *****************************************************
+    /* -----------------------------------------------------
+ 		ATALHO PARA COMENTAR VARIAS LINHAS: CTRL + SHIFT + C
+ 	 ----------------------------------------------------- */
 
     // WINDOWS
 
@@ -26,9 +26,7 @@ public class AppConsts {
     //public static final String CAMINHO_OBJETO = "/home/USUARIO/TAP/lstObjeto.json";
     //public static final String CAMINHO_MOTORISTA = "/home/USUARIO/TAP/lstMotorista.json";
     //public static final String CAMINHO_VEICULO = "/home/USUARIO/TAP/lstVeiculo.json";
-    //public static final String CAMINHO_LOGIN = "/home/USUARIO/TAP/lstLogin.json";
+    //public static final String CAMINHO_LOGIN = "/home/USUARIO/TAP/lstUsuario.json.json";
     //public static final String CAMINHO_MODELO = "/home/USUARIO/lstModelo.json";
-    //public static final String CAMINHO_DEPOSITO_PENDENTE = "/home/USUARIO/lstDepositoPendente.json";
-    //public static final String CAMINHO_DEPOSITO = "/home/USUARIO/lstDeposito.json";
     //public static final String CAMINHO_ROTEIRO = "/home/USUARIO/lstRoteiro.json";
 }

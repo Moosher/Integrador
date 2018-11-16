@@ -29,7 +29,7 @@
 								testeNullCNH = ", CHN tipo "+veiculo.getMotorista().getTipoCNH();
 							}
 							
-							out.println("<form id=formmodal action="+AppConsts.CAMINHO +"/RetornoRoteiroServlet method=post>");
+							out.println("<form id=formmodal action='"+AppConsts.CAMINHO +"/CadastroVeiculoServlet' method='get'>");
 							out.println("<a style='width:100%' href=#alt"+i+" data-toggle=collapse aria-expanded=false class='btn btn-primary btn-lg btn-block ola' >"+ testeNullNome +"</a>");
 							
 							out.println("<ul style='margin-top:10px; padding:0px;' class=collapse list-unstyled id=alt"+i+">");
@@ -46,16 +46,16 @@
 							
 							out.println("<tr>");							
 							out.println("<td>");						
-							out.println("<input class=form-control name=marca value="+veiculo.getMarca(  )+" disabled />");
+							out.println("<input class=form-control name=marca value="+veiculo.getMarca()+" disabled />");
 							out.println("</td>");						
 							out.println("<td>");						
 							out.println("<input class=form-control name=modelo value="+veiculo.getModelo().getNome()+" disabled />");
 							out.println("</td>");						
 							out.println("<td>");						
-							out.println("<input class=form-control name=ano value="+veiculo.getAno(  )+" disabled />");
+							out.println("<input class=form-control name=ano value="+veiculo.getAno()+" disabled />");
 							out.println("</td>");						
 							out.println("<td>");						
-							out.println("<input class=form-control name=placa value="+veiculo.getPlaca(  )+" disabled />");
+							out.println("<input class=form-control name=placa value="+veiculo.getPlaca()+" disabled />");
 							out.println("</td>");						
 							out.println("<tr>");
 							
@@ -66,15 +66,19 @@
 							out.println("<label class='input-group-text'>Motorista</label>");
 							out.println("</div>");
 							
-							out.println("<select class=custom-select name=motorista>");
+							out.println("<select class=custom-select name=motoristaIndex>");
 							out.println("<option>"+testeNullNome + testeNullCNH+"</option>");
+							int j = 0;
 							for( Motorista motorista : motoristas.getMotoristaList()){
 								if(motorista.isDisponivel()){
-									out.println("<option value="+i+">"+motorista.getNome()+", CHN tipo "+motorista.getTipoCNH()+"</option>");
+									out.println("<option value="+j+">"+motorista.getNome()+", CHN tipo "+motorista.getTipoCNH()+"</option>");
 								}
-								i++;
+								j++;
 							}
-							out.println("<option value=desalocar>Desalocar motorista</option>");
+							if(!testeNullNome.equals( "Motorista não alocado" )){
+								out.println("<option value=desalocar>Desalocar motorista</option>");
+								
+							}
 							out.println("</select>");
 							
 							out.println("<div class='input-group-append'>");
@@ -84,6 +88,7 @@
 							
 							out.println("</li>");
 							out.println("</ul>");
+							out.println("<input type=hidden name=veiculoIndex value="+i+" />");
 							out.println("</form>");
 							out.println("<hr class=half-rule />");
 
