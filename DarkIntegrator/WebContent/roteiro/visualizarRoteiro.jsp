@@ -42,10 +42,11 @@
 							}						
 						%>
 						<br/>
-						<form action=<%=AppConsts.CAMINHO+"/RetornoRoteiroServlet" %>	method="post">					
+						<form action=<%=AppConsts.CAMINHO+"/RetornoRoteiroServlet" %> method="post">					
 							<% 
 								int i = 0;
-								for(Objeto objeto : roteiros.getObjetoRoteiroList(request.getParameter( "id" ))){
+								String roteiroId = request.getParameter( "id" );
+								for(Objeto objeto : roteiros.getObjetoRoteiroList(roteiroId)){
 									out.println("<ul style='margin-top:10px; padding:0px;' class=list-unstyled id=alt"+i+">");
 									out.println("<li class=list-unstyled>");
 									
@@ -80,15 +81,16 @@
 									out.println("<label class='input-group-text'>Status</label>");
 									out.println("</div>");
 									
-									out.println("<select class=custom-select name=motorista>");
-									out.println("<option value=ausente>Não Entregue</option>");
-									out.println("<option value=entregue>Entregue</option>");						
+									out.println("<select class=custom-select name=entrega"+i+" >");
+									out.println("<option value=N>Não Entregue</option>");
+									out.println("<option value=S>Entregue</option>");						
 									out.println("</select>");									
 									out.println("</div>");
 									
 									out.println("</li>");
 									out.println("</ul>");
 									out.println("<hr class=half-rule />");
+									out.println("<input name=roteiroId type=hidden value="+roteiroId+" />");
 
 									i++;
 								}
