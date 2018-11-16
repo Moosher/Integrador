@@ -1,7 +1,40 @@
+<%@page import="model.Motorista"%>
+<%@page import="model.Objeto"%>
+<%@page import="model.Veiculo"%>
+<%@page import="java.util.Random"%>
+<%@page import="model.dao.VeiculoDao"%>
+<%@page import="model.dao.MotoristaDao"%>
+<%@page import="model.dao.ObjetoDao"%>
+<%@page import="model.dao.DaoFactory"%>
 <%@page import="resources.AppConsts"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+
+	<%		
+		ObjetoDao objetos = DaoFactory.getDaoFactory().getObjetoDao();
+		MotoristaDao motoristas = DaoFactory.getDaoFactory().getMotoristaDao();
+		VeiculoDao veiculos = DaoFactory.getDaoFactory().getVeiculoDao();
+		
+		Objeto objeto = null;
+		Motorista motorista = null;
+		Veiculo veiculo = null;
+		Random randNumber = new Random();
+		int indexObjeto = 0;
+		int indexMotorista = 0;
+		int indexVeiculo = 0;
+		if( objetos.getObjetoList().size() > 0 || motoristas.getMotoristaList().size() > 0 || veiculos.getVeiculoList().size() > 0){
+		
+			indexObjeto = randNumber.nextInt(objetos.getObjetoList().size()) + 0;
+			indexMotorista = randNumber.nextInt(motoristas.getMotoristaList().size()) + 0;
+			indexVeiculo = randNumber.nextInt(veiculos.getVeiculoList().size()) + 0;
+	
+		objeto = objetos.getObjetoList().get( indexObjeto );
+		motorista = motoristas.getMotoristaList().get( indexMotorista );
+		veiculo = veiculos.getVeiculoList().get( indexVeiculo );
+		}
+		
+	%>
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
@@ -21,6 +54,7 @@
 				<div id="homecont">
 					<div id="home" class="cadcont">
 						<h2 class="ola"> Olá <%= " "+session.getAttribute( "usuario" ) %> </h2>
+						
 						<p> 
 							Em linguística, a noção de texto é ampla e ainda aberta a uma
 							definição mais precisa. Grosso modo, pode ser entendido como
@@ -28,36 +62,49 @@
 							interpretadas pelo leitor de acordo com seus conhecimentos
 							linguísticos e culturais. Seu tamanho é variável.
 						</p>
+						
 						<jsp:include page="/includes/modal.jsp" />
 						<button class="btn btn-primary" data-toggle="modal" data-target=".modalCaminhoes">Organizar Entregas</button>  
 						<jsp:include page="/ui.cadastro/alterarMotorista.jsp" />
 						<button class="btn btn-primary" data-toggle="modal" data-target=".modalMOT">Organizar MOT</button>  
 					</div>
 				
-					<div class="sliderCont">
-						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-						  <ol class="carousel-indicators">
-						    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-						    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						  </ol>
-						  <div class="carousel-inner">
-						    <div class="carousel-item active">
-						      <img class="d-block w-100" src=<%=AppConsts.CAMINHO+ "/img/teste5.jpg" %> alt="First slide">
-						    </div>
-						    <div class="carousel-item">
-						      <img class="d-block w-100" src=<%=AppConsts.CAMINHO+ "/img/teste4.jpg" %> alt="Second slide">
-						    </div>
-						  </div>
-						  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-						    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						    <span class="sr-only">Previous</span>
-						  </a>
-						  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-						    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-						    <span class="sr-only">Next</span>
-						  </a>
+				
+					<%if (objeto != null || motorista == null || veiculo == null){%>				
+					<div class="cardCont">
+					
+					<% if (objeto != null){%>
+						<div class="card">
+							<img class="card-img-top" src=<%=AppConsts.CAMINHO+ "/img/teste3.jpg" %> alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title"><%= objeto.getCodigoLocalizador(  )%></h5>
+								<p class="card-text">Aqui vai algumas informações sobreo  motorista e tal, ja que precisamos popular essa area do sistema, da pra colocar uns card de veículo tbm</p>
+								<a href="#" class="btn btn-primary">Visualizar</a>
+							</div>
 						</div>
+						
+					<%} if (motorista != null){%>
+						<div class="card">
+							<img class="card-img-top" src=<%=AppConsts.CAMINHO+ "/img/teste.jpg" %> alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title"><%= motorista.getNome(  ) %></h5>
+								<p class="card-text">Aqui vai algumas informações sobreo  motorista e tal, ja que precisamos popular essa area do sistema, da pra colocar uns card de veículo tbm</p>
+								<a href="#" class="btn btn-primary">Visualizar</a>
+							</div>
+						</div>
+						
+					<%} if (veiculo != null){%>
+						<div class="card">
+							<img class="card-img-top" src=<%=AppConsts.CAMINHO+ "/img/teste2.jpg" %> alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title"><%= veiculo.getModelo(  ).getNome(  ) %></h5>
+								<p class="card-text">Aqui vai algumas informações sobreo  motorista e tal, ja que precisamos popular essa area do sistema, da pra colocar uns card de veículo tbm</p>
+								<a href="#" class="btn btn-primary">Visualizar</a>
+							</div>
+						</div>
+						<%} %>
 					</div>
+					<%} %>
 															
 				</div>
 			</div>
