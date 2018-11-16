@@ -96,9 +96,10 @@ public class BancoModeloDao implements ModeloDao {
 	Modelo modelo = null;
 
 	try {
-	    ps = conn.prepareStatement("SELECT * FROM MODELO where modelo.modeloid = ? ;");
+	    ps = conn.prepareStatement("SELECT * FROM MODELO where modelo.modeloid = ? ");
 	    ps.setString(1, modeloId);
 	    rs = ps.executeQuery();
+	    rs.next();
 
 	    String nome = rs.getString(2);
 	    int capacidade = Integer.parseInt(rs.getString(3));

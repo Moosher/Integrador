@@ -31,7 +31,7 @@ public class BancoVeiculoDao implements VeiculoDao {
 
 	try {
 	    ps = conn.prepareStatement(
-		    "INSERT INTO Veiculo (VeiculoID, VeiculoMarca, VeiculoAno, VeiculoPlaca, MotoristaID, VeiculoModeloID) values(VEICULO_SEQ.NEXTVAL, ? , ? , ? , ? , ? , ? )");
+		    "INSERT INTO Veiculo (VeiculoID, VeiculoMarca, VeiculoAno, VeiculoPlaca, MotoristaID, VeiculoModeloID, VeiculoStatus) values(VEICULO_SEQ.NEXTVAL, ? , ? , ? , ? , ?, ?)");
 	    ps.setString( 1, veiculo.getMarca());
 	    ps.setString( 2, veiculo.getAno() );
 	    ps.setString( 3, veiculo.getPlaca() );

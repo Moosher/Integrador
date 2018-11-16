@@ -5,12 +5,16 @@ import java.util.Date;
 public class Objeto {
 
     public enum Status {
-	POSTADO(0), ENTREGUE(1), PENDENTE(2), EM_ENTREGA(3);
+	POSTADO("Postado"), ENTREGUE("Entregue"), PENDENTE("Pendente"), EM_ENTREGA("Em Entrega");
 
-	private int status;
+	private String status;
 
-	Status(int status) {
+	Status(String status) {
 	    this.status = status;
+	}
+
+	String getStatus(){
+	    return this.status;
 	}
     }
 
@@ -45,7 +49,7 @@ public class Objeto {
     }
 
     public Objeto(String id, String codigoLocalizador, String nomeRemetente, String enderecoRemetente, String nomeDestinatario,
-	    String enderecoDestinatario, Date dataDeposito, Double peso, int statusCod) {
+	    String enderecoDestinatario, Date dataDeposito, Double peso, String statusDesc) {
 	this.id = id;
 	this.setCodigoLocalizador(codigoLocalizador);
 	this.nomeRemetente = nomeRemetente;
@@ -54,7 +58,7 @@ public class Objeto {
 	this.enderecoDestinatario = enderecoDestinatario;
 	this.dataDeposito = dataDeposito;
 	this.peso = peso;
-	this.setStatuscod(statusCod);
+	this.setStatusDesc(statusDesc);
 
 
     }
@@ -110,13 +114,22 @@ public class Objeto {
 	return this.status;
     }
 
-    public int getStatuscod() {
-	return this.status.status;
+    public String getStatusDesc() {
+	return this.status.getStatus();
     }
 
-    public void setStatuscod(int statusCod) {
-	this.status.status = statusCod;
+    public void setStatusDesc(String statusDesc) {
+	if(statusDesc.equalsIgnoreCase("Postado")) {
+	    this.status = Status.POSTADO;
+	}else if(statusDesc.equalsIgnoreCase("Entregue")){
+	    this.status = Status.ENTREGUE;
+	}else if(statusDesc.equalsIgnoreCase("Pendente")){
+	    this.status = Status.PENDENTE;
+	}else if(statusDesc.equalsIgnoreCase("Em Entrega")){
+	    this.status = Status.EM_ENTREGA;
+	}
     }
+
     public void setStatus(Status status) {
 	this.status = status;
     }
@@ -188,6 +201,6 @@ public class Objeto {
 
     @Override
     public String toString() {
-	return "CÃ³digo: " + this.codigoLocalizador + ", Data: " + this.dataDeposito;
+	return "Código: " + this.codigoLocalizador +" Data: " + this.dataDeposito +" Status: "+ this.status.getStatus();
     }
 }

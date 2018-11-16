@@ -70,11 +70,12 @@ public class BancoMotoristaDao implements MotoristaDao {
 	    rs = ps.executeQuery();
 
 	    while(rs.next()) {
+		String motoristaId = rs.getString(1);
 		String nome = rs.getString(2);
 		Date dataNasc = rs.getDate(3);
 		String endereco = rs.getString(4);
-		String tipoCNH = rs.getString(5);
-		char cNH = rs.getString(6).charAt(0);
+		char tipoCNH = rs.getString(5).charAt(0);
+		String cNH = rs.getString(6);
 		String disponivelString = rs.getString(7);
 
 		boolean disponivel;
@@ -87,7 +88,8 @@ public class BancoMotoristaDao implements MotoristaDao {
 
 		DaoFactory daoFactory = DaoFactory.getDaoFactory();
 
-		motorista = new Motorista(nome, dataNasc, endereco, cNH, tipoCNH, disponivel);
+		motorista = new Motorista(nome, dataNasc, endereco, tipoCNH, cNH, disponivel);
+		motorista.setId(motoristaId);
 		lst.add(motorista);
 	    }
 
@@ -125,9 +127,10 @@ public class BancoMotoristaDao implements MotoristaDao {
 	Motorista motorista = null;
 
 	try {
-	    ps = conn.prepareStatement("SELECT * FROM MOTORISTA where motorista.motoristaid = ? ;");
+	    ps = conn.prepareStatement("SELECT * FROM MOTORISTA where motorista.motoristaid = ?");
 	    ps.setString(1, motoristaId);
 	    rs = ps.executeQuery();
+	    rs.next();
 
 	    String nome = rs.getString(2);
 	    Date dataNasc = rs.getDate(3);
@@ -147,6 +150,7 @@ public class BancoMotoristaDao implements MotoristaDao {
 	    DaoFactory daoFactory = DaoFactory.getDaoFactory();
 
 	    motorista = new Motorista(nome, dataNasc, endereco, cNH, tipoCNH, disponivel);
+	    motorista.setId(motoristaId);
 
 	} catch (SQLException e) {
 	    e.printStackTrace();

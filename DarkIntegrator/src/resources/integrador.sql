@@ -39,7 +39,7 @@ CREATE TABLE Objeto (
   ObjetoEnderecoDestinatario VARCHAR(150),
   ObjetoDataDeposito DATE,
   ObjetoPeso NUMBER(*,2),
-  ObjetoStatus VARCHAR(1)
+  ObjetoStatus VARCHAR(20)
   );
     
 CREATE TABLE Roteiro (

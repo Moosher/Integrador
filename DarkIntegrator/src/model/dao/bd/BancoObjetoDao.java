@@ -32,7 +32,7 @@ public class BancoObjetoDao implements ObjetoDao {
 	    ps.setString( 5, objeto.getEnderecoDestinatario() );
 	    ps.setDate( 6, new java.sql.Date(objeto.getDataDeposito().getTime()) );
 	    ps.setDouble( 7, objeto.getPeso() );
-	    ps.setString( 8, String.valueOf( objeto.getStatuscod() ) );
+	    ps.setString( 8, objeto.getStatusDesc());
 	    ps.executeQuery();
 
 	    //			DatabaseMetaData meta = conn.getMetaData();
@@ -73,10 +73,10 @@ public class BancoObjetoDao implements ObjetoDao {
 		String enderecoDestinatario = rs.getString( 6 );
 		Date dataDeposito = rs.getDate( 7 );
 		double peso = Double.parseDouble(rs.getString( 8 ));
-		int statusCod = Integer.parseInt(rs.getString(9));
+		String statusDesc = rs.getString(9);
 
 		Objeto objeto = new Objeto(id, codigoLocalizador, nomeRemetente, enderecoRemetente,
-			nomeDestinatario, enderecoDestinatario, dataDeposito, peso, statusCod);
+			nomeDestinatario, enderecoDestinatario, dataDeposito, peso, statusDesc);
 
 		lst.add(objeto);
 	    }
@@ -94,7 +94,6 @@ public class BancoObjetoDao implements ObjetoDao {
 	    }
 	}
 
-	//TODO Fernando aqui não vai funcionar pq retorna uma lista de String, não objeto.
 	return lst;
     }
 
