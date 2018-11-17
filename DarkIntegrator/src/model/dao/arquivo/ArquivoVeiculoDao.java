@@ -37,14 +37,18 @@ public class ArquivoVeiculoDao implements VeiculoDao {
 
 	@Override
 	public void removerVeiculo(String veiculoId) {
-		// TODO Auto-generated method stub
+		List<Veiculo> veiculos = this.getVeiculoList();
+		int index = this.findIndexByPK(veiculoId);
+		veiculos.remove(index);
 
+		this.salvarArquivo(veiculos);
 	}
 
 	@Override
 	public void alterarVeiculo(Veiculo veiculo) {
-		List<Veiculo> veiculos = this.getVeiculoList();
 		int index = this.findIndexByPK(veiculo.getId());
+		this.removerVeiculo(veiculo.getId());
+		List<Veiculo> veiculos = this.getVeiculoList();
 		veiculos.add(index, veiculo);
 
 		this.salvarArquivo(veiculos);

@@ -47,8 +47,9 @@ public class ArquivoMotoristaDao implements MotoristaDao {
 
 	@Override
 	public void alterarMotorista(Motorista motorista) {
-		List<Motorista> motoristas = this.getMotoristaList();
 		int index = this.findIndexByPK(motorista.getId());
+		this.removerMotorista(motorista.getId());
+		List<Motorista> motoristas = this.getMotoristaList();
 		motoristas.add(index, motorista);
 
 		this.salvarArquivo(motoristas);

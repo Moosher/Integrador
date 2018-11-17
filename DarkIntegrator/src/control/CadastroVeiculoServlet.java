@@ -39,7 +39,9 @@ public class CadastroVeiculoServlet extends HttpServlet {
 			DaoFactory.getDaoFactory().getVeiculoDao().alterarVeiculo(veiculo);
 
 		} else {
-			veiculo.getMotorista().setDisponivel(true);
+			if (veiculo.getMotorista() != null) {
+				veiculo.getMotorista().setDisponivel(true);
+			}
 			Motorista motorista = DaoFactory.getDaoFactory().getMotoristaDao().getMotoristaList().get(Integer.parseInt(validarMotorista));
 			DaoFactory.getDaoFactory().getMotoristaDao().setDisponivel(motorista.getId(), false);
 			veiculo.setMotorista(motorista);
