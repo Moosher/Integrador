@@ -13,7 +13,6 @@ import model.Motorista;
 import model.Veiculo;
 import model.dao.DaoFactory;
 import model.dao.MotoristaDao;
-import model.dao.VeiculoDao;
 import resources.AppConsts;
 
 @WebServlet("/CadastroVeiculoServlet")
@@ -34,15 +33,17 @@ public class CadastroVeiculoServlet extends HttpServlet {
 
 		Veiculo veiculo = DaoFactory.getDaoFactory().getVeiculoDao().getVeiculoList()
 				.get(Integer.parseInt(validarVeiculo));
-		VeiculoDao vec = DaoFactory.getDaoFactory().alterarVeiculo();
 		if (validarMotorista.equals("desalocar")) {
 			veiculo.getMotorista().setDisponivel(true);
 			veiculo.setMotorista(null);
+			DaoFactory.getDaoFactory().getVeiculoDao().alterarVeiculo(veiculo);
+
 		} else {
 			Motorista motorista = DaoFactory.getDaoFactory().getMotoristaDao().getMotoristaList()
 					.get(Integer.parseInt(validarMotorista));
-			veiculo.setMotorista(motorista);
 			motorista.setDisponivel(false);
+			veiculo.setMotorista(motorista);
+			DaoFactory.getDaoFactory().getVeiculoDao().alterarVeiculo(veiculo);
 		}
 
 		response.sendRedirect(AppConsts.CAMINHO + "/home.jsp");

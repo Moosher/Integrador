@@ -10,6 +10,8 @@ public interface MotoristaDao {
 
     void removerMotorista( String motoristaId );
 
+    void alterarMotorista(Motorista motorista);
+
     List<Motorista> getMotoristaList();
 
     void setDisponivel( String motoristaId, boolean disponivel );

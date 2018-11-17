@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.Objeto;
 import model.Objeto.Status;
 import model.dao.DaoFactory;
-import model.dao.ObjetoDao;
 import model.dao.RoteiroDao;
 import resources.AppConsts;
 
@@ -62,12 +61,11 @@ public class RetornoRoteiroServlet extends HttpServlet {
 		entrega[8] = request.getParameter("entrega8") == null ? "" : request.getParameter("entrega8");
 		entrega[9] = request.getParameter("entrega9") == null ? "" : request.getParameter("entrega9");
 		int i = 0;
-		ObjetoDao objetos = DaoFactory.getDaoFactory().getObjetoDao().alterarObjeto();
 		for (Objeto objeto : roteiros.getObjetoRoteiroList(roteiroId)) {
 			if (entrega[i].equals("S")) {
-				objeto.setStatus(Status.ENTREGUE);
+				DaoFactory.getDaoFactory().getObjetoDao().setStatus(objeto.getId(), Status.ENTREGUE);
 			} else {
-				objeto.setStatus(Status.PENDENTE);
+				DaoFactory.getDaoFactory().getObjetoDao().setStatus(objeto.getId(), Status.PENDENTE);
 
 			}
 		}

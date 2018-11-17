@@ -10,37 +10,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-
-	<%		
-		ObjetoDao objetos = DaoFactory.getDaoFactory().getObjetoDao();
-		MotoristaDao motoristas = DaoFactory.getDaoFactory().getMotoristaDao();
-		VeiculoDao veiculos = DaoFactory.getDaoFactory().getVeiculoDao();
-		
-		Objeto objeto = null;
-		Motorista motorista = null;
-		Veiculo veiculo = null;
-		Random randNumber = new Random();
-		int indexObjeto = 0;
-		int indexMotorista = 0;
-		int indexVeiculo = 0;
-		
-		if( objetos.getObjetoList().size() > 0 ){
-			indexObjeto = randNumber.nextInt(objetos.getObjetoList().size()) + 0;
-			objeto = objetos.getObjetoList().get( indexObjeto );
-		}
-		
-		if(motoristas.getMotoristaList().size() > 0 ){
-			indexMotorista = randNumber.nextInt(motoristas.getMotoristaList().size()) + 0;
-			motorista = motoristas.getMotoristaList().get( indexMotorista );
-		}
-		
-		if( veiculos.getVeiculoList().size() > 0){			
-			indexVeiculo = randNumber.nextInt(veiculos.getVeiculoList().size()) + 0;
-			veiculo = veiculos.getVeiculoList().get( indexVeiculo );
-		}
-	
-		
-	%>
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
@@ -76,41 +45,6 @@
 					</div>
 				
 				
-					<%if (objeto != null || motorista == null || veiculo == null){%>				
-					<div class="cardCont">
-					
-					<% if (objeto != null){%>
-						<div class="card">
-							<img class="card-img-top" src=<%=AppConsts.CAMINHO+ "/img/teste3.jpg" %> alt="Card image cap">
-							<div class="card-body">
-								<h5 class="card-title"><%= objeto.getCodigoLocalizador(  )%></h5>
-								<p class="card-text">Aqui vai algumas informações sobreo  motorista e tal, ja que precisamos popular essa area do sistema, da pra colocar uns card de veículo tbm</p>
-								<a href="#" class="btn btn-primary">Visualizar</a>
-							</div>
-						</div>
-						
-					<%} if (motorista != null){%>
-						<div class="card">
-							<img class="card-img-top" src=<%=AppConsts.CAMINHO+ "/img/teste.jpg" %> alt="Card image cap">
-							<div class="card-body">
-								<h5 class="card-title"><%= motorista.getNome(  ) %></h5>
-								<p class="card-text">Aqui vai algumas informações sobreo  motorista e tal, ja que precisamos popular essa area do sistema, da pra colocar uns card de veículo tbm</p>
-								<a href="#" class="btn btn-primary">Visualizar</a>
-							</div>
-						</div>
-						
-					<%} if (veiculo != null){%>
-						<div class="card">
-							<img class="card-img-top" src=<%=AppConsts.CAMINHO+ "/img/teste2.jpg" %> alt="Card image cap">
-							<div class="card-body">
-								<h5 class="card-title"><%= veiculo.getModelo(  ).getNome(  ) %></h5>
-								<p class="card-text">Aqui vai algumas informações sobreo  motorista e tal, ja que precisamos popular essa area do sistema, da pra colocar uns card de veículo tbm</p>
-								<a href="#" class="btn btn-primary">Visualizar</a>
-							</div>
-						</div>
-						<%} %>
-					</div>
-					<%} %>
 															
 				</div>
 			</div>

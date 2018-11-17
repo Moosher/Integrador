@@ -57,6 +57,12 @@ public class BancoMotoristaDao implements MotoristaDao {
     }
 
     @Override
+    public void alterarMotorista(Motorista motorista) {
+	// TODO Auto-generated method stub
+
+    }
+
+    @Override
     public List<Motorista> getMotoristaList() {
 	List<Motorista> lst = new ArrayList<>();
 	Connection conn = DatabaseService.getConnection();

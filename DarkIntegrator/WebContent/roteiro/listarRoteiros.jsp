@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="resources.GerenciadorData"%>
 <%@page import="java.util.Date"%>
 <%@page import="model.dao.RoteiroDao"%>
@@ -13,7 +14,7 @@
 	RoteiroDao roteiros = DaoFactory.getDaoFactory().getRoteiroDao();
 
 	String data = request.getParameter( "data" );
-	roteiros.getRoteiroList(GerenciadorData.getInstance().strToDate( data ));
+	List<Roteiro> roteiroList = roteiros.getRoteiroList(GerenciadorData.getInstance().strToDate( data ));
 %>
 <html>
 	<head>
@@ -50,7 +51,7 @@
 						
 					<%
 						int i = 0;
-						for(Roteiro roteiro :roteiros.getRoteiroList()){
+						for(Roteiro roteiro : roteiroList){
 							if(!roteiro.getObjetosRoteiro().isEmpty()){
 							
 								
