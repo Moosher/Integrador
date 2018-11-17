@@ -105,7 +105,7 @@ public class ArquivoModeloDao implements ModeloDao {
 		List<Modelo> modelos = this.getModeloList();
 		if (modelos.isEmpty()) {
 			modelos.add(new Modelo("1", 10, "Carreta"));
-			modelos.add(new Modelo("2", 3, "Caminhão Báu"));
+			modelos.add(new Modelo("2", 3, "Caminho Bu"));
 			modelos.add(new Modelo("3", 1, "Van"));
 			this.salvarArquivo(modelos);
 		}

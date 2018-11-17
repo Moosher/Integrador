@@ -46,7 +46,7 @@ public class ArquivoObjetoDao implements ObjetoDao {
 	@Override
 	public List<Objeto> getObjetoList() {
 		Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
-		List<Objeto> objetos = new ArrayList<>();
+		List<Objeto> objetos = new ArrayList();
 		File file = new File(AppConsts.CAMINHO_OBJETO);
 		BufferedReader lstObjeto = null;
 		if (file.exists()) {
