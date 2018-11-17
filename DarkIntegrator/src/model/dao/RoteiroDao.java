@@ -1,6 +1,5 @@
 package model.dao;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +22,6 @@ public interface RoteiroDao {
 
     List<Objeto> getObjetoRoteiroList( String id );
 
-    void carregarArquivo() throws IOException;
-
-    Roteiro findRoteiroByID(String roteiroId);
+    Roteiro findRoteiroByPK(String roteiroId);
 
 }

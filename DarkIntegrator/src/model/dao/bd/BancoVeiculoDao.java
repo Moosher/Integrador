@@ -1,6 +1,5 @@
 package model.dao.bd;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -115,12 +114,7 @@ public class BancoVeiculoDao implements VeiculoDao {
     }
 
     @Override
-    public void carregarArquivo() throws IOException {
-
-    }
-
-    @Override
-    public void setDisponivel(Veiculo veiculo, boolean disponivel) {
+    public void setDisponivel(String veiculoId, boolean disponivel) {
 
     }
 
