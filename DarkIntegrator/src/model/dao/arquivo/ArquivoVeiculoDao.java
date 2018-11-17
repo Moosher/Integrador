@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,7 +52,7 @@ public class ArquivoVeiculoDao implements VeiculoDao {
 
     @Override
     public List<Veiculo> getVeiculoList() {
-	Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	List<Veiculo> veiculos = new ArrayList();
 	File file = new File(AppConsts.CAMINHO_VEICULO);
 	BufferedReader lstVeiculo = null;
@@ -77,7 +76,7 @@ public class ArquivoVeiculoDao implements VeiculoDao {
     }
 
     private void salvarArquivo(List<Veiculo> veiculos) {
-	Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	FileWriter lstJson = null;
 	String lstVeiculo = gson.toJson(veiculos);
 

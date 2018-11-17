@@ -37,8 +37,20 @@ public class ArquivoMotoristaDao implements MotoristaDao {
 
     @Override
     public void removerMotorista(String motoristaId) {
-	// TODO Auto-generated method stub
+	List<Motorista> motoristas = this.getMotoristaList();
+	int index = this.findIndexByPK(motoristaId);
+	motoristas.remove(index);
 
+	this.salvarArquivo(motoristas);
+    }
+
+    @Override
+    public void alterarMotorista(Motorista motorista) {
+	List<Motorista> motoristas = this.getMotoristaList();
+	int index = this.findIndexByPK(motorista.getId());
+	this.getMotoristaList().add(index, motorista);
+
+	this.salvarArquivo(motoristas);
     }
 
     @Override
@@ -77,7 +89,7 @@ public class ArquivoMotoristaDao implements MotoristaDao {
     }
 
     private void salvarArquivo(List<Motorista> motoristas) {
-	Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	FileWriter lstJson = null;
 	String lstMotorista = gson.toJson(motoristas);
 

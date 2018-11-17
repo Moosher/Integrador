@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -48,7 +47,7 @@ public class ArquivoRoteiroDao implements RoteiroDao {
 
     @Override
     public List<Roteiro> getRoteiroList() {
-	Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	List<Roteiro> roteiros = new ArrayList();
 	File file = new File(AppConsts.CAMINHO_ROTEIRO);
 	BufferedReader lstRoteiro = null;
@@ -71,8 +70,38 @@ public class ArquivoRoteiroDao implements RoteiroDao {
 	return roteiros;
     }
 
+
+    @Override
+    public List<Roteiro> getRoteiroList(Date data) {
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	File file = new File(AppConsts.CAMINHO_ROTEIRO);
+	BufferedReader lstRoteiro = null;
+	List<Roteiro> roteiros = new ArrayList();
+	if(file.exists()) {
+	    try {
+		lstRoteiro = new BufferedReader(new FileReader(AppConsts.CAMINHO_ROTEIRO));
+		Roteiro[] roteiroArray = gson.fromJson(lstRoteiro, Roteiro[].class);
+		roteiros.clear();
+		for(Roteiro roteiro : roteiroArray) {
+		    if(roteiro.getData().getTime() == data.getTime()) {
+			roteiros.add(roteiro);
+		    }
+		}
+	    }catch(IOException e) {
+		e.printStackTrace();
+	    } finally {
+		try {
+		    lstRoteiro.close();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	return roteiros;
+    }
+
     private void salvarArquivo(List<Roteiro> roteiros) {
-	Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	FileWriter lstJson = null;
 	String lstRoteiro = gson.toJson(roteiros);
 
@@ -118,11 +147,7 @@ public class ArquivoRoteiroDao implements RoteiroDao {
 	// TODO Auto-generated method stub
 
     }
-    @Override
-    public List<Roteiro> getRoteiroList(Date data) {
 
-	return null;
-    }
     @Override
     public List<Objeto> getObjetoRoteiroList( String id ) {
 	for ( Roteiro roteiro : this.getRoteiroList() ) {
