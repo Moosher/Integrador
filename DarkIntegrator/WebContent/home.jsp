@@ -23,16 +23,22 @@
 		int indexObjeto = 0;
 		int indexMotorista = 0;
 		int indexVeiculo = 0;
-		if( objetos.getObjetoList().size() > 0 || motoristas.getMotoristaList().size() > 0 || veiculos.getVeiculoList().size() > 0){
 		
+		if( objetos.getObjetoList().size() > 0 ){
 			indexObjeto = randNumber.nextInt(objetos.getObjetoList().size()) + 0;
-			indexMotorista = randNumber.nextInt(motoristas.getMotoristaList().size()) + 0;
-			indexVeiculo = randNumber.nextInt(veiculos.getVeiculoList().size()) + 0;
-	
-		objeto = objetos.getObjetoList().get( indexObjeto );
-		motorista = motoristas.getMotoristaList().get( indexMotorista );
-		veiculo = veiculos.getVeiculoList().get( indexVeiculo );
+			objeto = objetos.getObjetoList().get( indexObjeto );
 		}
+		
+		if(motoristas.getMotoristaList().size() > 0 ){
+			indexMotorista = randNumber.nextInt(motoristas.getMotoristaList().size()) + 0;
+			motorista = motoristas.getMotoristaList().get( indexMotorista );
+		}
+		
+		if( veiculos.getVeiculoList().size() > 0){			
+			indexVeiculo = randNumber.nextInt(veiculos.getVeiculoList().size()) + 0;
+			veiculo = veiculos.getVeiculoList().get( indexVeiculo );
+		}
+	
 		
 	%>
 <html>

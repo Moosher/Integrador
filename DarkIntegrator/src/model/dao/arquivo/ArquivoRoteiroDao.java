@@ -49,7 +49,7 @@ public class ArquivoRoteiroDao implements RoteiroDao {
     @Override
     public List<Roteiro> getRoteiroList() {
 	Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
-	List<Roteiro> roteiros = new ArrayList();
+	List<Roteiro> roteiros = new ArrayList<>();
 	File file = new File(AppConsts.CAMINHO_ROTEIRO);
 	BufferedReader lstRoteiro = null;
 	if(file.exists()) {

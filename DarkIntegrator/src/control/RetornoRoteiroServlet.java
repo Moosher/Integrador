@@ -9,14 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Objeto;
+import model.Objeto.Status;
 import model.dao.DaoFactory;
+import model.dao.ObjetoDao;
 import model.dao.RoteiroDao;
 import resources.AppConsts;
 
 /**
  * Servlet implementation class RetornoRoteiroServlet
  */
-@WebServlet( "/RetornoRoteiroServlet" )
+@WebServlet("/RetornoRoteiroServlet")
 public class RetornoRoteiroServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -30,40 +32,45 @@ public class RetornoRoteiroServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String[] entrega = new String[10];
-		String roteiroId = request.getParameter( "roteiroId" );
+		String roteiroId = request.getParameter("roteiroId");
 		RoteiroDao roteiros = DaoFactory.getDaoFactory().getRoteiroDao();
-		entrega[0] = request.getParameter( "entrega0" ) == null ? "" : request.getParameter( "entrega0" );
-		entrega[1] = request.getParameter( "entrega1" ) == null ? "" : request.getParameter( "entrega1" );
-		entrega[2] = request.getParameter( "entrega2" ) == null ? "" : request.getParameter( "entrega2" );
-		entrega[3] = request.getParameter( "entrega3" ) == null ? "" : request.getParameter( "entrega3" );
-		entrega[4] = request.getParameter( "entrega4" ) == null ? "" : request.getParameter( "entrega4" );
-		entrega[5] = request.getParameter( "entrega5" ) == null ? "" : request.getParameter( "entrega5" );
-		entrega[6] = request.getParameter( "entrega6" ) == null ? "" : request.getParameter( "entrega6" );
-		entrega[7] = request.getParameter( "entrega7" ) == null ? "" : request.getParameter( "entrega7" );
-		entrega[8] = request.getParameter( "entrega8" ) == null ? "" : request.getParameter( "entrega8" );
-		entrega[9] = request.getParameter( "entrega9" ) == null ? "" : request.getParameter( "entrega9" );
+		entrega[0] = request.getParameter("entrega0") == null ? "" : request.getParameter("entrega0");
+		entrega[1] = request.getParameter("entrega1") == null ? "" : request.getParameter("entrega1");
+		entrega[2] = request.getParameter("entrega2") == null ? "" : request.getParameter("entrega2");
+		entrega[3] = request.getParameter("entrega3") == null ? "" : request.getParameter("entrega3");
+		entrega[4] = request.getParameter("entrega4") == null ? "" : request.getParameter("entrega4");
+		entrega[5] = request.getParameter("entrega5") == null ? "" : request.getParameter("entrega5");
+		entrega[6] = request.getParameter("entrega6") == null ? "" : request.getParameter("entrega6");
+		entrega[7] = request.getParameter("entrega7") == null ? "" : request.getParameter("entrega7");
+		entrega[8] = request.getParameter("entrega8") == null ? "" : request.getParameter("entrega8");
+		entrega[9] = request.getParameter("entrega9") == null ? "" : request.getParameter("entrega9");
 		int i = 0;
-		for ( Objeto objeto : roteiros.getObjetoRoteiroList( roteiroId ) ) {
-			if ( entrega[i].equals( "S" ) ) {
-				objeto.setStatusDesc( "Entregue" );
+		ObjetoDao objetos = DaoFactory.getDaoFactory().getObjetoDao().alterarObjeto();
+		for (Objeto objeto : roteiros.getObjetoRoteiroList(roteiroId)) {
+			if (entrega[i].equals("S")) {
+				objeto.setStatus(Status.ENTREGUE);
 			} else {
-				objeto.setStatusDesc( "Pendente" );
+				objeto.setStatus(Status.PENDENTE);
 
 			}
 		}
-		response.sendRedirect( AppConsts.CAMINHO + "/home.jsp" );
+		response.sendRedirect(AppConsts.CAMINHO + "/home.jsp");
 	}
 }

@@ -46,7 +46,7 @@ public class ArquivoModeloDao implements ModeloDao {
 	@Override
 	public List<Modelo> getModeloList() {
 		Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
-		List<Modelo> modelos = new ArrayList();
+		List<Modelo> modelos = new ArrayList<>();
 		File file = new File(AppConsts.CAMINHO_MODELO);
 		BufferedReader lstModelo = null;
 		if (file.exists()) {

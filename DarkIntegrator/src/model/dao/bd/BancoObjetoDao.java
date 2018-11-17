@@ -54,7 +54,7 @@ public class BancoObjetoDao implements ObjetoDao {
 
     @Override
     public List<Objeto> getObjetoList() throws ParseException {
-	List<Objeto> lst = new ArrayList();
+	List<Objeto> lst = new ArrayList<>();
 	Connection conn = DatabaseService.getConnection();
 	PreparedStatement ps = null;
 	ResultSet rs = null;

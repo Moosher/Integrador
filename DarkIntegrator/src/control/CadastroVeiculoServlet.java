@@ -13,9 +13,10 @@ import model.Motorista;
 import model.Veiculo;
 import model.dao.DaoFactory;
 import model.dao.MotoristaDao;
+import model.dao.VeiculoDao;
 import resources.AppConsts;
 
-@WebServlet( "/CadastroVeiculoServlet" )
+@WebServlet("/CadastroVeiculoServlet")
 public class CadastroVeiculoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -26,59 +27,62 @@ public class CadastroVeiculoServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		String validarMotorista = request.getParameter( "motoristaIndex" );
-		String validarVeiculo = request.getParameter( "veiculoIndex" );
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String validarMotorista = request.getParameter("motoristaIndex");
+		String validarVeiculo = request.getParameter("veiculoIndex");
 
-		Veiculo veiculo = DaoFactory.getDaoFactory().getVeiculoDao().getVeiculoList().get( Integer.parseInt( validarVeiculo ) );
-		if ( validarMotorista.equals( "desalocar" ) ) {
-			veiculo.getMotorista().setDisponivel( true );
-			veiculo.setMotorista( null );
+		Veiculo veiculo = DaoFactory.getDaoFactory().getVeiculoDao().getVeiculoList()
+				.get(Integer.parseInt(validarVeiculo));
+		VeiculoDao vec = DaoFactory.getDaoFactory().alterarVeiculo();
+		if (validarMotorista.equals("desalocar")) {
+			veiculo.getMotorista().setDisponivel(true);
+			veiculo.setMotorista(null);
 		} else {
-			Motorista motorista = DaoFactory.getDaoFactory().getMotoristaDao().getMotoristaList().get( Integer.parseInt( validarMotorista ) );
-			veiculo.setMotorista( motorista );
-			motorista.setDisponivel( false );
+			Motorista motorista = DaoFactory.getDaoFactory().getMotoristaDao().getMotoristaList()
+					.get(Integer.parseInt(validarMotorista));
+			veiculo.setMotorista(motorista);
+			motorista.setDisponivel(false);
 		}
 
-		response.sendRedirect( AppConsts.CAMINHO + "/home.jsp" );
+		response.sendRedirect(AppConsts.CAMINHO + "/home.jsp");
 	}
 
 	@Override
-	protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		String marca = request.getParameter( "marca" );
-		String ano = request.getParameter( "ano" );
-		String placa = request.getParameter( "placa" );
-		String validarMotorista = request.getParameter( "motorista" );
-		int modeloIndex = Integer.parseInt( request.getParameter( "modelo" ) );
-		Modelo modelo = DaoFactory.getDaoFactory().getModeloDao().getModeloList().get( modeloIndex );
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String marca = request.getParameter("marca");
+		String ano = request.getParameter("ano");
+		String placa = request.getParameter("placa");
+		String validarMotorista = request.getParameter("motorista");
+		int modeloIndex = Integer.parseInt(request.getParameter("modelo"));
+		Modelo modelo = DaoFactory.getDaoFactory().getModeloDao().getModeloList().get(modeloIndex);
 		MotoristaDao motoristaDao = DaoFactory.getDaoFactory().getMotoristaDao();
 
-		if ( validarMotorista.equals( "N" ) ) {
-			Veiculo veiculo = new Veiculo( marca, modelo, ano, placa );
-			DaoFactory.getDaoFactory().getVeiculoDao().adicionarVeiculo( veiculo );
-			response.sendRedirect( AppConsts.CAMINHO + "/home.jsp" );
+		if (validarMotorista.equals("N")) {
+			Veiculo veiculo = new Veiculo(marca, modelo, ano, placa);
+			DaoFactory.getDaoFactory().getVeiculoDao().adicionarVeiculo(veiculo);
+			response.sendRedirect(AppConsts.CAMINHO + "/home.jsp");
 		} else {
-			int motoristaIndex = Integer.parseInt( validarMotorista );
-			Motorista motorista = DaoFactory.getDaoFactory().getMotoristaDao().getMotoristaList().get( motoristaIndex );
-			String tipoCNH = String.valueOf( motorista.getTipoCNH() );
-			if ( tipoCNH.equals( "B" ) && modeloIndex == 2 && motorista.isDisponivel() ) {
-				Veiculo veiculo = new Veiculo( marca, modelo, ano, placa );
-				veiculo.setMotorista( motorista );
-				motoristaDao.setDisponivel( motorista.getId(), false );
-				DaoFactory.getDaoFactory().getVeiculoDao().adicionarVeiculo( veiculo );
-				response.sendRedirect( AppConsts.CAMINHO + "/home.jsp" );
+			int motoristaIndex = Integer.parseInt(validarMotorista);
+			Motorista motorista = DaoFactory.getDaoFactory().getMotoristaDao().getMotoristaList().get(motoristaIndex);
+			String tipoCNH = String.valueOf(motorista.getTipoCNH());
+			if (tipoCNH.equals("B") && modeloIndex == 2 && motorista.isDisponivel()) {
+				Veiculo veiculo = new Veiculo(marca, modelo, ano, placa);
+				veiculo.setMotorista(motorista);
+				motoristaDao.setDisponivel(motorista.getId(), false);
+				DaoFactory.getDaoFactory().getVeiculoDao().adicionarVeiculo(veiculo);
+				response.sendRedirect(AppConsts.CAMINHO + "/home.jsp");
 
-			} else if ( tipoCNH.equals( "C" ) && motorista.isDisponivel() ) {
-				Veiculo veiculo = new Veiculo( marca, modelo, ano, placa );
-				veiculo.setMotorista( motorista );
-				motoristaDao.setDisponivel( motorista.getId(), false );
-				DaoFactory.getDaoFactory().getVeiculoDao().adicionarVeiculo( veiculo );
-				response.sendRedirect( AppConsts.CAMINHO + "/home.jsp" );
+			} else if (tipoCNH.equals("C") && motorista.isDisponivel()) {
+				Veiculo veiculo = new Veiculo(marca, modelo, ano, placa);
+				veiculo.setMotorista(motorista);
+				motoristaDao.setDisponivel(motorista.getId(), false);
+				DaoFactory.getDaoFactory().getVeiculoDao().adicionarVeiculo(veiculo);
+				response.sendRedirect(AppConsts.CAMINHO + "/home.jsp");
 			} else {
-				response.sendRedirect( AppConsts.CAMINHO + "/ui.cadastro/falhaCadastroVeiculo.jsp" );
+				response.sendRedirect(AppConsts.CAMINHO + "/ui.cadastro/falhaCadastroVeiculo.jsp");
 			}
 		}
-
 	}
-
 }

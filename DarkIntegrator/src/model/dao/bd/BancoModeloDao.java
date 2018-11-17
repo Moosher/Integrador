@@ -42,7 +42,7 @@ public class BancoModeloDao implements ModeloDao {
 
     @Override
     public List<Modelo> getModeloList() {
-	List<Modelo> lst = new ArrayList();
+	List<Modelo> lst = new ArrayList<>();
 	Connection conn = DatabaseService.getConnection();
 	PreparedStatement ps = null;
 	ResultSet rs = null;

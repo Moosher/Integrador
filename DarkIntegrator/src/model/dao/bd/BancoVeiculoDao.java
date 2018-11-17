@@ -61,7 +61,7 @@ public class BancoVeiculoDao implements VeiculoDao {
 
     @Override
     public List<Veiculo> getVeiculoList() {
-	List<Veiculo> lst = new ArrayList();
+	List<Veiculo> lst = new ArrayList<>();
 	Connection conn = DatabaseService.getConnection();
 	PreparedStatement ps = null;
 	ResultSet rs = null;

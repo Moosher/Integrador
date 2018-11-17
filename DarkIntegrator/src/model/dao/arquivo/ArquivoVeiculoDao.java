@@ -54,7 +54,7 @@ public class ArquivoVeiculoDao implements VeiculoDao {
     @Override
     public List<Veiculo> getVeiculoList() {
 	Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
-	List<Veiculo> veiculos = new ArrayList();
+	List<Veiculo> veiculos = new ArrayList<>();
 	File file = new File(AppConsts.CAMINHO_VEICULO);
 	BufferedReader lstVeiculo = null;
 	if(file.exists()) {

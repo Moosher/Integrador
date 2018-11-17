@@ -56,7 +56,7 @@ public class BancoRoteiroDao implements RoteiroDao {
 
 	@Override
 	public List<Roteiro> getRoteiroList() {
-		List<Roteiro> lst = new ArrayList();
+		List<Roteiro> lst = new ArrayList<>();
 		Connection conn = DatabaseService.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;

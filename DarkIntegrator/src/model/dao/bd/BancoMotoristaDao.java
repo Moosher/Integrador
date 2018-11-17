@@ -58,7 +58,7 @@ public class BancoMotoristaDao implements MotoristaDao {
 
     @Override
     public List<Motorista> getMotoristaList() {
-	List<Motorista> lst = new ArrayList();
+	List<Motorista> lst = new ArrayList<>();
 	Connection conn = DatabaseService.getConnection();
 	PreparedStatement ps = null;
 	ResultSet rs = null;

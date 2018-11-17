@@ -55,7 +55,7 @@ public class ArquivoMotoristaDao implements MotoristaDao {
 	@Override
 	public List<Motorista> getMotoristaList() {
 		Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
-		List<Motorista> motoristas = new ArrayList();
+		List<Motorista> motoristas = new ArrayList<>();
 		File file = new File(AppConsts.CAMINHO_MOTORISTA);
 		BufferedReader lstMotorista = null;
 		if (file.exists()) {
