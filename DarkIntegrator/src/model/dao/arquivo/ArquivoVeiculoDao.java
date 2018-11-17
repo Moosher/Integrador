@@ -45,7 +45,7 @@ public class ArquivoVeiculoDao implements VeiculoDao {
 	public void alterarVeiculo(Veiculo veiculo) {
 		List<Veiculo> veiculos = this.getVeiculoList();
 		int index = this.findIndexByPK(veiculo.getId());
-		this.getVeiculoList().add(index, veiculo);
+		veiculos.add(index, veiculo);
 
 		this.salvarArquivo(veiculos);
 	}

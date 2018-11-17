@@ -34,16 +34,17 @@ public class CadastroVeiculoServlet extends HttpServlet {
 		Veiculo veiculo = DaoFactory.getDaoFactory().getVeiculoDao().getVeiculoList()
 				.get(Integer.parseInt(validarVeiculo));
 		if (validarMotorista.equals("desalocar")) {
-			veiculo.getMotorista().setDisponivel(true);
+			DaoFactory.getDaoFactory().getMotoristaDao().setDisponivel(veiculo.getMotorista().getId(), true);
 			veiculo.setMotorista(null);
 			DaoFactory.getDaoFactory().getVeiculoDao().alterarVeiculo(veiculo);
 
 		} else {
-			Motorista motorista = DaoFactory.getDaoFactory().getMotoristaDao().getMotoristaList()
-					.get(Integer.parseInt(validarMotorista));
-			motorista.setDisponivel(false);
+			veiculo.getMotorista().setDisponivel(true);
+			Motorista motorista = DaoFactory.getDaoFactory().getMotoristaDao().getMotoristaList().get(Integer.parseInt(validarMotorista));
+			DaoFactory.getDaoFactory().getMotoristaDao().setDisponivel(motorista.getId(), false);
 			veiculo.setMotorista(motorista);
 			DaoFactory.getDaoFactory().getVeiculoDao().alterarVeiculo(veiculo);
+			System.out.println("");
 		}
 
 		response.sendRedirect(AppConsts.CAMINHO + "/home.jsp");

@@ -49,7 +49,7 @@ public class ArquivoMotoristaDao implements MotoristaDao {
 	public void alterarMotorista(Motorista motorista) {
 		List<Motorista> motoristas = this.getMotoristaList();
 		int index = this.findIndexByPK(motorista.getId());
-		this.getMotoristaList().add(index, motorista);
+		motoristas.add(index, motorista);
 
 		this.salvarArquivo(motoristas);
 	}
