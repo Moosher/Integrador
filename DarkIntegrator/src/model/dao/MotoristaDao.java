@@ -1,19 +1,20 @@
 package model.dao;
 
-import java.io.IOException;
 import java.util.List;
 
 import model.Motorista;
 
 public interface MotoristaDao {
 
-	void adicionarMotorista( Motorista motorista );
+    void adicionarMotorista( Motorista motorista );
 
-	void removerMotorista( Motorista motorista );
+    void removerMotorista( String motoristaId );
 
-	List<Motorista> getMotoristaList();
+    void alterarMotorista(Motorista motorista);
 
-	void carregarArquivo() throws IOException;
+    List<Motorista> getMotoristaList();
 
-	void setDisponivel( Motorista motorista, boolean disponivel );
+    void setDisponivel( String motoristaId, boolean disponivel );
+
+    Motorista findMotoristaByPK(String motoristaId);
 }

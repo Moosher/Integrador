@@ -7,9 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import model.Modelo;
 import model.dao.ModeloDao;
@@ -17,34 +18,57 @@ import resources.AppConsts;
 
 public class ArquivoModeloDao implements ModeloDao {
 
-	private static List<Modelo> modelos = new ArrayList();
-
-	@Override
-	public void adicionarModelo(Modelo modelo) {
-		modelo.setId(FileControl.getInstance().gerarId());
-		this.modelos.add(modelo);
-		try {
-			salvarArquivo();
-		} catch (IOException e) {
-			e.printStackTrace();
+	public ArquivoModeloDao() {
+		File file = new File(AppConsts.CAMINHO_MODELO);
+		if (!file.exists()) {
+			List<Modelo> modelos = new ArrayList<>();
+			this.salvarArquivo(modelos);
+			this.salvarPreDefinidos();
 		}
 	}
 
 	@Override
-	public void removerModelo(Modelo modelo) {
+	public void adicionarModelo(Modelo modelo) {
+		List<Modelo> modelos = this.getModeloList();
+		modelo.setId(FileControl.getInstance().gerarId());
+		modelos.add(modelo);
+
+		this.salvarArquivo(modelos);
+	}
+
+	@Override
+	public void removerModelo(String modeloId) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public List<Modelo> getModeloList() {
-		// TODO Auto-generated method stub
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		List<Modelo> modelos = new ArrayList();
+		File file = new File(AppConsts.CAMINHO_MODELO);
+		BufferedReader lstModelo = null;
+		if (file.exists()) {
+			try {
+				lstModelo = new BufferedReader(new FileReader(AppConsts.CAMINHO_MODELO));
+				Modelo[] modeloArray = gson.fromJson(lstModelo, Modelo[].class);
+				modelos.clear();
+				modelos.addAll(Arrays.asList(modeloArray));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					lstModelo.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		return modelos;
 	}
 
-	public void salvarArquivo() throws IOException {
-
-		Gson gson = new Gson();
+	private void salvarArquivo(List<Modelo> modelos) {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		FileWriter lstJson = null;
 		String lstModelo = gson.toJson(modelos);
 
@@ -55,52 +79,34 @@ public class ArquivoModeloDao implements ModeloDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			lstJson.close();
+			try {
+				lstJson.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 	@Override
-	public void carregarArquivo() throws IOException {
-		File file = new File(AppConsts.CAMINHO_MODELO);
-		if (file.exists()) {
-			BufferedReader lstModelo = null;
-			Gson gson = new Gson();
-			try {
-				lstModelo = new BufferedReader(new FileReader(AppConsts.CAMINHO_MODELO));
-				Modelo[] modeloArray = gson.fromJson(lstModelo, Modelo[].class);
-				modelos.clear();
-				modelos.addAll(Arrays.asList(modeloArray));
-
-			} finally {
-				lstModelo.close();
+	public Modelo findModeloByPK(String modeloId) {
+		List<Modelo> modelos = this.getModeloList();
+		for (Modelo modelo : modelos) {
+			if (modelo.getId().equals(modeloId)) {
+				return modelo;
 			}
-		} else {
-			this.salvarArquivo();
 		}
+		return null;
 	}
-	
+
 	@Override
 	public void salvarPreDefinidos() {
-		if (this.modelos.isEmpty()) {
-			this.modelos.add(new Modelo(10, "Carreta"));
-			this.modelos.add(new Modelo(3, "Caminhão-Baú"));
-			this.modelos.add(new Modelo(1, "Van"));
+		List<Modelo> modelos = this.getModeloList();
+		if (modelos.isEmpty()) {
+			modelos.add(new Modelo("1", 10, "Carreta"));
+			modelos.add(new Modelo("2", 3, "Caminho Bu"));
+			modelos.add(new Modelo("3", 1, "Van"));
+			this.salvarArquivo(modelos);
 		}
 	}
-
-	Comparator<Modelo> cmp = new Comparator<Modelo>() {
-		@Override
-		public int compare(Modelo modelo1, Modelo modelo2) {
-
-			if (modelo1.getCapacidade() > modelo2.getCapacidade()) {
-				return -1;
-			} else if (modelo1.getCapacidade() == modelo2.getCapacidade()) {
-				return 0;
-			} else {
-				return 1;
-			}
-
-		}
-	};
 }

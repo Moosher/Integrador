@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="resources.GerenciadorData"%>
+<%@page import="java.util.Date"%>
 <%@page import="model.dao.RoteiroDao"%>
 <%@page import="model.dao.DaoFactory"%>
 <%@page import="model.Roteiro"%>
@@ -6,10 +9,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
+<!DOCTYPE html>
 <%
 	RoteiroDao roteiros = DaoFactory.getDaoFactory().getRoteiroDao();
+
+	String data = request.getParameter( "data" );
+	List<Roteiro> roteiroList = roteiros.getRoteiroList(GerenciadorData.getInstance().strToDate( data ));
 %>
-<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
@@ -26,37 +32,76 @@
 			<jsp:include page="/includes/sidemenu.jsp" />
 			<div class="content">
 				<jsp:include page="/includes/header.jsp" />
-				<div id="homecont">				
-					<div id="home" class="container">
-						<h3>Selecione um Roteiro</h3>	
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th class="thbtn">Acessar</th>
-									<th>Detalhes</th>
-									<th>Data</th>
-								</tr>
-							</thead>
-							<tbody>
-								<%
-									int i = 0;
-									for(Roteiro roteiro :roteiros.getRoteiroList()){
-										if(!roteiro.getObjetosRoteiro().isEmpty()){
-											out.println("<tr>");											
-											out.println("<td><a class=btn btn-primary href="+ AppConsts.CAMINHO + "/roteiro/visualizarRoteiro.jsp?id="+ i +">Acesse</a></td>");											
-											out.println("<td>"+ roteiro.toString() +"</td>");											
-											out.println("<td>"+ roteiro.getData() +"</td>");											
-											out.println("</tr>");
-											
-										}
-											i++;
-										
-									}	
-								%>
-							</tbody>
-						</table>
+				<div class="container cadcont">				
+						<h3>Roteiros</h3>	
+						
+						<form action=<%=AppConsts.CAMINHO + "/BuscaRoteiroServlet"%> method="post">
+							<div class="input-group" >
+								<div class="input-group-prepend">
+									<label class="input-group-text">Busca por Data</label>
+								</div>
+							<input class="form-control" name="data" type="date" value='<%= data %>' />
+								<div class="input-group-append" >
+									<button type="submit" class="btn btn-primary" >Buscar</button>
+								</div>
+							</div>
+						</form>
+						
+						<br/>
+						
+					<%
+						int i = 0;
+						for(Roteiro roteiro : roteiroList){
+							if(!roteiro.getObjetosRoteiro().isEmpty()){
+							
+								
+								out.println("<ul style='margin-top:10px; padding:0px;' class=list-unstyled id=alt"+i+">");
+								out.println("<li class=list-unstyled>");
+								
+								out.println("<table style=width:100% >");
+								
+								out.println("<tr id=trlabels >");						
+								out.println("<td>Motorista</td>");
+								out.println("<td>CNH</td>");
+								out.println("<td>Veiculo</td>");
+								out.println("<td>Carga</td>");							
+								out.println("<td>Data do Roteiro</td>");
+								out.println("</tr>");
+								
+								
+								out.println("<tr>");							
+								out.println("<td>");						
+								out.println("<input class=form-control name=nomeMotorista value="+roteiro.getVeiculo().getMotorista().getNome()+" disabled />");
+								out.println("</td>");						
+								out.println("<td>");						
+								out.println("<input class=form-control name=cnh value="+roteiro.getVeiculo().getMotorista().getCNH()+" disabled />");
+								out.println("</td>");						
+								out.println("<td>");						
+								out.println("<input class=form-control name=modelo value="+roteiro.getVeiculo().getModelo().getNome()+" disabled />");
+								out.println("</td>");						
+								out.println("<td>");						
+								out.println("<input class=form-control name=carga value="+ roteiros.getObjetoRoteiroList(roteiro.getId()).size() +" disabled />");
+								out.println("</td>");						
+								out.println("<td>");						
+								out.println("<input class=form-control name=data value='"+roteiro.getData()+"' disabled />");
+								out.println("</td>");						
+								out.println("<tr>");
+								
+								out.println("</table>");
+								
+								
+								out.println("<a  id=btnmodal class='btn btn-secondary btn-sm btn-block' href='"+ AppConsts.CAMINHO + "/roteiro/visualizarRoteiro.jsp?id="+ roteiro.getId() + "&veiculo="+roteiro.getVeiculo().getId()+"' >Entrar</a>");
+						
+								out.println("</li>");
+								out.println("</ul>");
+								out.println("<hr class=half-rule />");
+								out.println("<br/>");
+	
+								i++;
+							}
+						}
+					%>						
 					</div>
-				</div>
 			</div>
 			<div class="footer">
 				<jsp:include page="/includes/footer.html" />

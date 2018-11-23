@@ -44,19 +44,11 @@
 
 					<ul>
 						<%
-// 								List<String> lstObjeto = new ArrayList();
-// 								lstObjeto = objetos.getObjetoList().toString();
-								
-// 								for(String lst : lstObjeto){
-// 									out.println("<li>"+ lst +"</li>");
-// 								}
-							%>
-
-
-
+							for(Objeto objeto : objetos.getObjetoList()){
+								out.println("<li>"+ objeto.toString() +"</li>");
+							}
+						%>
 					</ul>
-
-
 				</div>
 			</div>
 

@@ -8,10 +8,10 @@ CREATE TABLE Motorista (
   MotoristaStatus CHAR(1) NOT NULL
 );
   
-CREATE TABLE VeiculoTipo (
-  VeiculoTipoID NUMBER CONSTRAINT PK_VeiculoTipo PRIMARY KEY,
-  VeiculoTipoDescricao VARCHAR(45),
-  VeiculoTipoCapacidade NUMBER(*,2)
+CREATE TABLE Modelo (
+  ModeloID NUMBER CONSTRAINT PK_VeiculoTipo PRIMARY KEY,
+  ModeloDescricao VARCHAR(45),
+  ModeloCapacidade NUMBER
 );
 
 CREATE TABLE Usuario (
@@ -23,11 +23,11 @@ CREATE TABLE Usuario (
 CREATE TABLE Veiculo (
   VeiculoID NUMBER CONSTRAINT PK_Veiculo PRIMARY KEY,
   VeiculoMarca VARCHAR(45),
-  VeiculoModelo NUMBER(4),
   VeiculoAno NUMBER(4),
   VeiculoPlaca VARCHAR(7),
   MotoristaID NUMBER, CONSTRAINT FK_Motorista FOREIGN KEY(MotoristaID) REFERENCES Motorista(MotoristaID),
-  VeiculoTipoID NUMBER, CONSTRAINT FK_VeiculoTipo FOREIGN KEY(VeiculoTipoID) REFERENCES VeiculoTipo(VeiculoTipoID)
+  VeiculoModeloID NUMBER, CONSTRAINT FK_Modelo FOREIGN KEY(VeiculoModeloID) REFERENCES Modelo(ModeloID),
+  VeiculoStatus CHAR(1) NOT NULL
 );
 
 CREATE TABLE Objeto (
@@ -39,13 +39,12 @@ CREATE TABLE Objeto (
   ObjetoEnderecoDestinatario VARCHAR(150),
   ObjetoDataDeposito DATE,
   ObjetoPeso NUMBER(*,2),
-  ObjetoStatus VARCHAR(1)
+  ObjetoStatus VARCHAR(20)
   );
     
 CREATE TABLE Roteiro (
   RoteiroID NUMBER CONSTRAINT PK_Roteiro_ID PRIMARY KEY,
   RoteiroData DATE,
-  RoteiroStatus CHAR(1),
   ObjetoID NUMBER, CONSTRAINT FK_Objeto FOREIGN KEY(ObjetoID) REFERENCES Objeto(ObjetoID),
   VeiculoID NUMBER, CONSTRAINT FK_Veiculo FOREIGN KEY(VeiculoID) REFERENCES Veiculo(VeiculoID)
 );
@@ -57,11 +56,17 @@ CREATE TABLE RoteiroObjeto (
 );
 
 CREATE SEQUENCE MOTORISTA_SEQ start with 1 increment by 1;
-CREATE SEQUENCE VEICULOTIPO_SEQ start with 1 increment by 1;
 CREATE SEQUENCE USUARIO_SEQ start with 1 increment by 1;
 CREATE SEQUENCE VEICULO_SEQ start with 1 increment by 1;
 CREATE SEQUENCE OBJETO_SEQ start with 1 increment by 1;
 CREATE SEQUENCE ROTEIRO_SEQ start with 1 increment by 1;
 CREATE SEQUENCE ROTEIROOBJETO_SEQ start with 1 increment by 1;
+CREATE SEQUENCE MODELO_SEQ start with 1 increment by 1;
+
+INSERT INTO "INTEGRADOR"."MODELO" (MODELOID, MODELODESCRICAO, MODELOCAPACIDADE) VALUES ('1', 'Carreta', '10');
+INSERT INTO "INTEGRADOR"."MODELO" (MODELOID, MODELODESCRICAO, MODELOCAPACIDADE) VALUES ('2', 'Caminhao Bau', '3');
+INSERT INTO "INTEGRADOR"."MODELO" (MODELOID, MODELODESCRICAO, MODELOCAPACIDADE) VALUES ('3', 'Van', '1');
+
+
 
 COMMIT;

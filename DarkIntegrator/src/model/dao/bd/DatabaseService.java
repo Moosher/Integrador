@@ -5,24 +5,24 @@ import java.sql.DriverManager;
 
 public class DatabaseService {
 
-	static String url = "jdbc:oracle:thin:@localhost:1521:XE";
+    static String url = "jdbc:oracle:thin:@localhost:1521:XE";
 
-	static String user = "integrador";
+    static String user = "integrador";
 
-	static String passwd = "schema";
+    static String passwd = "123456";
 
-	public static Connection getConnection() {
-		Connection conn = null;
+    public static Connection getConnection() {
+	Connection conn = null;
 
-		try {
+	try {
 
-			conn = DriverManager.getConnection( url, user, passwd );
+	    conn = DriverManager.getConnection( url, user, passwd );
 
-		} catch ( Exception e ) {
-			e.printStackTrace();
-		}
-
-		return conn;
-
+	} catch ( Exception e ) {
+	    e.printStackTrace();
 	}
+
+	return conn;
+
+    }
 }

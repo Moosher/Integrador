@@ -1,3 +1,11 @@
+<%@page import="model.Motorista"%>
+<%@page import="model.Objeto"%>
+<%@page import="model.Veiculo"%>
+<%@page import="java.util.Random"%>
+<%@page import="model.dao.VeiculoDao"%>
+<%@page import="model.dao.MotoristaDao"%>
+<%@page import="model.dao.ObjetoDao"%>
+<%@page import="model.dao.DaoFactory"%>
 <%@page import="resources.AppConsts"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -19,8 +27,9 @@
 			<div class="content">
 				<jsp:include page="/includes/header.jsp" />
 				<div id="homecont">
-					<div id="home" class="container">
+					<div id="home" class="cadcont">
 						<h2 class="ola"> Olá <%= " "+session.getAttribute( "usuario" ) %> </h2>
+						
 						<p> 
 							Em linguística, a noção de texto é ampla e ainda aberta a uma
 							definição mais precisa. Grosso modo, pode ser entendido como
@@ -28,36 +37,14 @@
 							interpretadas pelo leitor de acordo com seus conhecimentos
 							linguísticos e culturais. Seu tamanho é variável.
 						</p>
+						
 						<jsp:include page="/includes/modal.jsp" />
 						<button class="btn btn-primary" data-toggle="modal" data-target=".modalCaminhoes">Organizar Entregas</button>  
+						<jsp:include page="/ui.cadastro/alterarMotorista.jsp" />
+						<button class="btn btn-primary" data-toggle="modal" data-target=".modalMOT">Organizar MOT</button>  
 					</div>
-					
-					<div class="card">
-						<img class="card-img-top" src=<%=AppConsts.CAMINHO+ "/img/teste3.jpg" %> alt="Card image cap">
-						<div class="card-body">
-							<h5 class="card-title">Nome do Motorista</h5>
-							<p class="card-text">Aqui vai algumas informações sobreo  motorista e tal, ja que precisamos popular essa area do sistema, da pra colocar uns card de veículo tbm</p>
-							<a href="#" class="btn btn-primary">Visualizar</a>
-						</div>
-					</div>
-					
-					<div class="card">
-						<img class="card-img-top" src=<%=AppConsts.CAMINHO+ "/img/teste.jpg" %> alt="Card image cap">
-						<div class="card-body">
-							<h5 class="card-title">Nome do Motorista</h5>
-							<p class="card-text">Aqui vai algumas informações sobreo  motorista e tal, ja que precisamos popular essa area do sistema, da pra colocar uns card de veículo tbm</p>
-							<a href="#" class="btn btn-primary">Visualizar</a>
-						</div>
-					</div>
-
-					<div class="card">
-						<img class="card-img-top" src=<%=AppConsts.CAMINHO+ "/img/teste2.jpg" %> alt="Card image cap">
-						<div class="card-body">
-							<h5 class="card-title">Nome do Veículo</h5>
-							<p class="card-text">Aqui vai algumas informações sobreo  motorista e tal, ja que precisamos popular essa area do sistema, da pra colocar uns card de veículo tbm</p>
-							<a href="#" class="btn btn-primary">Visualizar</a>
-						</div>
-					</div>
+				
+				
 															
 				</div>
 			</div>
@@ -71,6 +58,9 @@
 		<script type="text/javascript" src="js/scrollercdn.js"></script>
 		<script type="text/javascript" src="js/ui.js"></script>
 		<script type="text/javascript">
+		
+		
+		
 			// 			$(function(){
 			<%-- 				<% if(session.getAttribute( "usuario" ) == null)response.sendRedirect( AppConsts.CAMINHO+"/index.jsp" );%> --%>
 			// 			})			

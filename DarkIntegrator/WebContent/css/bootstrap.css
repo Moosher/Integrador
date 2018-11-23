@@ -5429,6 +5429,10 @@ button.close {
   border-top: 1px solid #e9ecef;
 }
 
+#sidebarCollapse{
+	width:40px;
+}
+
 .modal-footer > :not(:first-child) {
   margin-left: .25rem;
 }

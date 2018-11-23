@@ -19,9 +19,9 @@
 				<form action=<%=AppConsts.CAMINHO+"/CadastroLoginServlet" %> method="post">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="inputGroup-sizing-default">Nome(Login)</span>
+							<span class="input-group-text" id="inputGroup-sizing-default">Login</span>
 						</div>
-						<input type="text" placeholder="Nome" name="nome" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
+						<input type="text" placeholder="login" name="login" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
