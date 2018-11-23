@@ -28,7 +28,7 @@
 				<jsp:include page="/includes/header.jsp" />
 				<div id="homecont">
 					<div id="home" class="cadcont">
-						<h2 class="ola"> Olá <%= " "+session.getAttribute( "usuario" ) %> </h2>
+						<h2 class="ola"> Olá, <%= " "+session.getAttribute( "usuario" ) %>. </h2>
 						
 						<p> 
 							Em linguística, a noção de texto é ampla e ainda aberta a uma
